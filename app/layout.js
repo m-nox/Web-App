@@ -1,6 +1,12 @@
 import "./globals.css";
 import PWARegistration from "@/components/PWARegistration";
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export const metadata = {
   title: "Lini HRIS - Enterprise Edition",
   description: "Modern HRIS Web Application for Enterprise Management",
