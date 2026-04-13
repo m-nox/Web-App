@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Clock, Calendar, CheckCircle, AlertCircle, Fingerprint } from 'lucide-react'
 
 export default function EmployeeDashboard() {
   const [profile, setProfile] = useState(null)
@@ -10,12 +9,41 @@ export default function EmployeeDashboard() {
   const [time, setTime] = useState(new Date())
   const [loading, setLoading] = useState(true)
   const [processLoading, setProcessLoading] = useState(false)
+  const [installPrompt, setInstallPrompt] = useState(null)
+  const [isInstalled, setIsInstalled] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000)
     fetchAll()
-    return () => clearInterval(timer)
+
+    // Capture PWA install prompt event
+    const handler = (e) => {
+      e.preventDefault()
+      setInstallPrompt(e)
+    }
+    window.addEventListener('beforeinstallprompt', handler)
+    window.addEventListener('appinstalled', () => setIsInstalled(true))
+
+    // Check if already running as installed PWA
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstalled(true)
+    }
+
+    return () => {
+      clearInterval(timer)
+      window.removeEventListener('beforeinstallprompt', handler)
+    }
   }, [])
+
+  const handleInstall = async () => {
+    if (!installPrompt) return
+    installPrompt.prompt()
+    const { outcome } = await installPrompt.userChoice
+    if (outcome === 'accepted') {
+      setInstallPrompt(null)
+      setIsInstalled(true)
+    }
+  }
 
   const fetchAll = async () => {
     setLoading(true)
@@ -96,6 +124,41 @@ export default function EmployeeDashboard() {
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       
+      {/* Install App Banner - shown only if not installed yet and prompt is available */}
+      {!isInstalled && installPrompt && (
+        <div style={{
+          ...cardStyle,
+          background: 'linear-gradient(135deg, #00AEEF 0%, #0088ba 100%)',
+          border: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          <img src="/icon-192.png" alt="Icon" style={{ width: '52px', height: '52px', borderRadius: '12px', flexShrink: 0 }} />
+          <div style={{ flex: 1, minWidth: '180px' }}>
+            <p style={{ margin: 0, fontWeight: 'bold', color: 'white', fontSize: '1rem' }}>Install Aplikasi Lini HRIS</p>
+            <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Tambahkan ke Home Screen untuk akses lebih cepat tanpa buka browser</p>
+          </div>
+          <button
+            onClick={handleInstall}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: 'white',
+              color: '#00AEEF',
+              border: 'none',
+              borderRadius: 'var(--radius-md)',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              fontSize: '0.875rem',
+              flexShrink: 0
+            }}
+          >
+            📲 Install Sekarang
+          </button>
+        </div>
+      )}
+
       {/* Header Profile Section */}
       {profile && (
         <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
