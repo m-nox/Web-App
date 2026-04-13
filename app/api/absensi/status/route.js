@@ -1,7 +1,8 @@
 import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { getClientIp, checkIsAtOffice } from '@/utils/supabase/api-auth'
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -9,19 +10,12 @@ const supabaseAdmin = createClient(
 )
 
 export async function GET() {
-  // NEXT.JS 15+ REQUIRED AWAIT
   const cookieStore = await cookies()
-  const headerList = await headers()
 
   try {
-    // 1. Get Client IP
-    let clientIp = headerList.get('x-forwarded-for')?.split(',')[0] || 
-                   headerList.get('x-real-ip') || 
-                   '127.0.0.1'
-    if (clientIp.includes('::ffff:')) clientIp = clientIp.replace('::ffff:', '')
-    
-    const officeIp = process.env.OFFICE_IP
-    const isAtOffice = clientIp === officeIp || clientIp === '127.0.0.1' || clientIp === '::1'
+    // 1. Get Client IP (centralized)
+    const clientIp = await getClientIp()
+    const isAtOffice = checkIsAtOffice(clientIp)
 
     // 2. Auth Check
     const supabase = createServerClient(
@@ -64,7 +58,7 @@ export async function GET() {
       karyawan,
       attendance,
       clientIp,
-      officeIp: officeIp || 'NOT_SET',
+      officeIp: process.env.OFFICE_IP || 'NOT_SET',
       isAtOffice
     })
   } catch (err) {

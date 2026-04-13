@@ -1,7 +1,8 @@
 import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { getClientIp, checkIsAtOffice } from '@/utils/supabase/api-auth'
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -10,17 +11,11 @@ const supabaseAdmin = createClient(
 
 export async function POST(request) {
   const cookieStore = await cookies()
-  const headerList = await headers()
 
   try {
-    // 1. IP Verification
-    let clientIp = headerList.get('x-forwarded-for')?.split(',')[0] || 
-                   headerList.get('x-real-ip') || 
-                   '127.0.0.1'
-    if (clientIp.includes('::ffff:')) clientIp = clientIp.replace('::ffff:', '')
-    
-    const officeIp = process.env.OFFICE_IP
-    const isAtOffice = clientIp === officeIp || clientIp === '127.0.0.1' || clientIp === '::1'
+    // 1. IP Verification (centralized, supports IPv6 prefix)
+    const clientIp = await getClientIp()
+    const isAtOffice = checkIsAtOffice(clientIp)
 
     if (!isAtOffice) {
       return NextResponse.json({ error: `Absensi hanya dapat dilakukan di jaringan kantor. (IP: ${clientIp})` }, { status: 403 })
