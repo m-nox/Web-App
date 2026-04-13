@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch files
+*_tmp.js
+check_*.js
+AGENTS.md
+CLAUDE.md
