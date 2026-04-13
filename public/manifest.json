@@ -1,21 +1,43 @@
 {
   "name": "Lini HRIS",
   "short_name": "Lini HRIS",
-  "description": "Enterprise HRIS",
+  "description": "Sistem HR untuk karyawan Liniswara",
   "start_url": "/login",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#F8FAFC",
   "theme_color": "#00AEEF",
+  "lang": "id",
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Buka dashboard karyawan",
+      "url": "/dashboard-karyawan",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Slip Gaji",
+      "short_name": "Slip Gaji",
+      "description": "Lihat slip gaji saya",
+      "url": "/dashboard-karyawan/slip-gaji",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
