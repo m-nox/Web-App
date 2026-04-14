@@ -33,40 +33,18 @@ self.addEventListener('activate', (event) => {
 // Fetch strategy:
 // - API routes: Network first (always fresh data), fallback to cache
 // - Static assets (images, fonts, pages): Cache first, fallback to network
-self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
-
-  // Skip non-GET and cross-origin requests
-  if (event.request.method !== 'GET') return;
-  if (url.origin !== location.origin) return;
-
-  // API routes: Network first
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Only cache successful responses
-          if (response.ok) {
-            const cloned = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
-          }
-          return response;
-        })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  // Static assets and pages: Cache first
+  // Optimized Strategy: Network First for everything to ensure users always see latest UI
+  // Fallback to cache only if network is down (Offline Mode)
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        if (!response || !response.ok) return response;
-        const cloned = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+    fetch(event.request)
+      .then((response) => {
+        // Only cache successful GET responses
+        if (response.ok && event.request.method === 'GET') {
+          const cloned = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+        }
         return response;
-      });
-    })
+      })
+      .catch(() => caches.match(event.request))
   );
 });
