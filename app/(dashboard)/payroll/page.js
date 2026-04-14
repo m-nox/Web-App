@@ -378,42 +378,44 @@ export default function PayrollPage() {
       <style dangerouslySetInnerHTML={{
         __html: `
         @media (max-width: 1024px) {
-          .summary-item { border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.5rem; padding-right: 0 !important; }
+          .summary-item { border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem; padding-right: 0 !important; }
           .summary-item:last-child { border-bottom: none; }
-          .summary-header { flex-direction: column !important; align-items: flex-start !important; }
-          .summary-actions { width: 100%; justify-content: flex-start; }
-          .summary-title { font-size: 1.75rem !important; }
+          .summary-header { padding: 1.5rem !important; }
+          .summary-title { font-size: 1.5rem !important; }
+          .summary-card { padding: 1.5rem !important; gap: 1.5rem !important; border-radius: 1.5rem !important; }
         }
-        @media (max-width: 640px) {
-          .summary-card { padding: 2rem !important; gap: 2rem !important; }
-          .summary-value { font-size: 2rem !important; }
+        @media (max-width: 768px) {
+          .summary-header { flex-direction: column !important; align-items: stretch !important; gap: 1rem !important; }
+          .summary-actions { width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
+          .summary-value { font-size: 1.75rem !important; }
+          .summary-item h2 { font-size: 1.75rem !important; }
         }
       `}} />
 
       {/* Header Section */}
-      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', padding: '1.5rem 2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <div style={{
-            width: '4.5rem', height: '4.5rem', backgroundColor: 'var(--primary)',
-            borderRadius: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: '3.5rem', height: '3.5rem', backgroundColor: 'var(--primary)',
+            borderRadius: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: 'var(--shadow-primary)'
           }}>
-            <Wallet style={{ width: '2.5rem', height: '2.5rem', color: 'white' }} />
+            <Wallet style={{ width: '2rem', height: '2rem', color: 'white' }} />
           </div>
           <div>
-            <h1 style={{ fontSize: '2.25rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Payroll Hub</h1>
-            <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0 0', fontWeight: '500' }}>Manage transparency, empower people.</p>
+            <h1 className="summary-title" style={{ fontSize: '1.75rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Payroll Hub</h1>
+            <p style={{ color: 'var(--text-muted)', margin: '0.15rem 0 0 0', fontWeight: '500', fontSize: '0.9rem' }}>Manage transparency, empower people.</p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <button onClick={exportToPDF} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem' }}>
-            <FileText style={{ height: '1.1rem', width: '1.1rem', color: '#f43f5e' }} />
+        <div className="summary-actions" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <button onClick={exportToPDF} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem', padding: '0.6rem 1rem', fontSize: '0.875rem' }}>
+            <FileText style={{ height: '1rem', width: '1rem', color: '#f43f5e' }} />
             PDF Report
           </button>
 
-          <button onClick={exportToExcel} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem' }}>
-            <Download style={{ height: '1.1rem', width: '1.1rem', color: '#10b981' }} />
+          <button onClick={exportToExcel} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem', padding: '0.6rem 1rem', fontSize: '0.875rem' }}>
+            <Download style={{ height: '1rem', width: '1rem', color: '#10b981' }} />
             Excel Data
           </button>
 
@@ -421,9 +423,9 @@ export default function PayrollPage() {
             onClick={() => setShowConfirm(true)}
             disabled={isGenerating}
             className="btn btn-primary"
-            style={{ gap: '0.75rem', padding: '0.75rem 1.5rem' }}
+            style={{ gap: '0.6rem', padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
           >
-            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '1.25rem', width: '1.25rem' }} /> : <Calculator style={{ height: '1.25rem', width: '1.25rem' }} />}
+            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '1.1rem', width: '1.1rem' }} /> : <Calculator style={{ height: '1.1rem', width: '1.1rem' }} />}
             {isGenerating ? 'Calculating...' : 'Execute Payroll'}
           </button>
         </div>
@@ -432,35 +434,35 @@ export default function PayrollPage() {
       {/* Summary Section */}
       <div className="summary-card" style={{
         background: 'linear-gradient(135deg, var(--primary) 0%, #0088ba 100%)',
-        borderRadius: '2.5rem',
-        padding: '3rem',
+        borderRadius: '1.5rem',
+        padding: '2rem',
         color: 'white',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '3rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gap: '2rem',
         boxShadow: 'var(--shadow-lg)'
       }}>
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '2rem' }}>
-          <p style={{ fontSize: '0.7rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '1rem' }}>Total Disbursement</p>
-          <h2 className="summary-value" style={{ fontSize: '2.5rem', fontWeight: '900', margin: 0 }}>
+        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '1.5rem' }}>
+          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Total Disbursement</p>
+          <h2 className="summary-value" style={{ fontSize: '2rem', fontWeight: '900', margin: 0 }}>
             {formatCurrency(payrolls.reduce((acc, curr) => acc + (curr.total_gaji || 0), 0))}
           </h2>
           <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.5rem' }}>Beban operasional periode berjalan.</p>
         </div>
 
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '2rem' }}>
-          <p style={{ fontSize: '0.7rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '1rem' }}>Data Records</p>
-          <h2 className="summary-value" style={{ fontSize: '2.5rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Employees</h2>
-          <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.5rem' }}>Seluruh data gaji terproses.</p>
+        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '1.5rem' }}>
+          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Data Records</p>
+          <h2 className="summary-value" style={{ fontSize: '2rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Employees</h2>
+          <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Seluruh data gaji terproses.</p>
         </div>
 
         <div className="summary-item">
-          <p style={{ fontSize: '0.7rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '1rem' }}>Last Update</p>
+          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Last Update</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <History style={{ height: '1.5rem', width: '1.5rem', color: '#60a5fa' }} />
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
+            <History style={{ height: '1.25rem', width: '1.25rem', color: '#60a5fa' }} />
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
           </div>
-          <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.5rem' }}>Keamanan data terjamin.</p>
+          <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Keamanan data terjamin.</p>
         </div>
       </div>
 
