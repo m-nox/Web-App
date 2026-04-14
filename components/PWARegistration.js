@@ -55,40 +55,77 @@ export default function PWARegistration() {
   return (
     <div style={{
       position: 'fixed',
-      bottom: '1rem',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: 'calc(100% - 2rem)',
-      maxWidth: '420px',
-      backgroundColor: '#fff',
-      border: '1px solid #e2e8f0',
-      borderRadius: '16px',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-      padding: '1rem 1.25rem',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
+      bottom: '1.5rem',
+      right: '1.5rem',
       zIndex: 9999,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+      gap: '0.75rem',
     }}>
-      <img src="/icon-192.png" alt="Lini HRIS" style={{ width: '48px', height: '48px', borderRadius: '12px', flexShrink: 0 }} />
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ margin: 0, fontWeight: 'bold', fontSize: '0.9rem', color: '#1e293b' }}>Install Lini HRIS</p>
-        <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>Tambahkan ke layar utama untuk akses cepat</p>
-      </div>
-      <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-        <button
-          onClick={() => setShowBanner(false)}
-          style={{ padding: '0.5rem 0.75rem', border: '1px solid #e2e8f0', background: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', color: '#64748b' }}
+      {/* Floating Action Button */}
+      <button
+        onClick={handleInstall}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          padding: '0.75rem 1.25rem',
+          backgroundColor: '#00AEEF',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50px',
+          cursor: 'pointer',
+          fontSize: '0.9rem',
+          fontWeight: 'bold',
+          boxShadow: '0 10px 25px rgba(0, 174, 239, 0.3)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          animation: 'pwaSlideUp 0.5s ease-out',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
+          e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 174, 239, 0.4)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0) scale(1)';
+          e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 174, 239, 0.3)';
+        }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        <span>Install App</span>
+        
+        {/* Close Button Inside */}
+        <div 
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowBanner(false);
+          }}
+          style={{
+            marginLeft: '0.5rem',
+            padding: '2px',
+            opacity: 0.7,
+            transition: 'opacity 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
         >
-          Nanti
-        </button>
-        <button
-          onClick={handleInstall}
-          style={{ padding: '0.5rem 0.875rem', backgroundColor: '#00AEEF', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold' }}
-        >
-          Install
-        </button>
-      </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </div>
+      </button>
+
+      <style jsx global>{`
+        @keyframes pwaSlideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
