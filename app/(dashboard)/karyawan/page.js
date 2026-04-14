@@ -25,7 +25,9 @@ export default function KaryawanPage() {
     jabatan_id: '',
     departemen_id: '',
     role: 'karyawan',
-    password: ''
+    password: '',
+    nama_bank: '',
+    nomor_rekening: ''
   })
   const [processLoading, setProcessLoading] = useState(false)
   
@@ -90,7 +92,9 @@ export default function KaryawanPage() {
         jabatan_id: karyawan.jabatan_id || '',
         departemen_id: karyawan.departemen_id || '',
         role: karyawan.role || 'karyawan',
-        password: karyawan.password || 'Hris123!'
+        password: karyawan.password || 'Hris123!',
+        nama_bank: karyawan.nama_bank || '',
+        nomor_rekening: karyawan.nomor_rekening || ''
       })
     } else {
       setFormData({ 
@@ -101,7 +105,9 @@ export default function KaryawanPage() {
         alamat: '',
         jabatan_id: '',
         departemen_id: '',
-        role: 'karyawan'
+        role: 'karyawan',
+        nama_bank: '',
+        nomor_rekening: ''
       })
     }
     setShowModal(true)
@@ -119,7 +125,9 @@ export default function KaryawanPage() {
       jabatan_id: '',
       departemen_id: '',
       role: 'karyawan',
-      password: ''
+      password: '',
+      nama_bank: '',
+      nomor_rekening: ''
     })
   }
 
@@ -353,6 +361,32 @@ export default function KaryawanPage() {
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>No. Telepon</label>
                     <input type="text" value={formData.no_telepon} onChange={(e) => setFormData({...formData, no_telepon: e.target.value})} placeholder="+62..." style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} />
+                  </div>
+                </div>
+
+                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.25rem', marginBottom: '1.25rem' }}>
+                  <p style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1rem', color: 'var(--text-dark)' }}>Informasi Perbankan (Payroll)</p>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Nama Bank</label>
+                      <input 
+                        type="text" 
+                        value={formData.nama_bank} 
+                        onChange={(e) => setFormData({...formData, nama_bank: e.target.value})} 
+                        placeholder="Contoh: BCA, Mandiri, BNI" 
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} 
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Nomor Rekening</label>
+                      <input 
+                        type="text" 
+                        value={formData.nomor_rekening} 
+                        onChange={(e) => setFormData({...formData, nomor_rekening: e.target.value})} 
+                        placeholder="000123456789" 
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} 
+                      />
+                    </div>
                   </div>
                 </div>
 

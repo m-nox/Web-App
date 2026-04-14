@@ -167,7 +167,14 @@ export default function EmployeeDashboard() {
           </div>
           <div>
              <h1 style={{ margin: '0 0 0.25rem 0', fontSize: '1.5rem', color: 'var(--text-dark)' }}>{profile.nama_depan} {profile.nama_belakang || ''}</h1>
-             <p style={{ margin: 0, color: 'var(--text-muted)' }}>{profile.jabatan?.nama_jabatan || 'Team Member'} • {profile.departemen?.nama_departemen || '-'}</p>
+             <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>{profile.jabatan?.nama_jabatan || 'Team Member'} • {profile.departemen?.nama_departemen || '-'}</p>
+             {(profile.nama_bank || profile.nomor_rekening) && (
+               <p style={{ margin: '0.5rem 0 0 0', color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 'bold', display: 'flex', gap: '0.5rem' }}>
+                 <span>🏦 {profile.nama_bank || 'Bank Belum Diatur'}</span>
+                 <span>•</span>
+                 <span>💳 {profile.nomor_rekening || '-'}</span>
+               </p>
+             )}
           </div>
         </div>
       )}
