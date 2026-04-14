@@ -7,6 +7,7 @@ export async function updateSession(request) {
   
   // BYPASS PWA AND STATIC FILES IMMEDIATELY
   const isPwaFile = pathname.endsWith('/manifest.json') || 
+                    pathname.endsWith('/manifest.webmanifest') || 
                     pathname.endsWith('/sw.js') || 
                     pathname.endsWith('.png') || 
                     pathname.endsWith('.ico')

@@ -11,7 +11,7 @@ export const viewport = {
 export const metadata = {
   title: "Lini HRIS - Enterprise Edition",
   description: "Modern HRIS Web Application for Enterprise Management",
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
