@@ -287,7 +287,7 @@ export default function EmployeeDashboard() {
                      <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
                         <th style={{ padding: '0.35rem 0', width: '28%' }}>Tgl</th>
                         <th style={{ padding: '0.35rem 0', width: '57%' }}>Jam</th>
-                        <th style={{ padding: '0.35rem 0', width: '15%', textAlign: 'center' }}>Sts</th>
+                        <th style={{ padding: '0.35rem 0', width: '15%', textAlign: 'center' }}>Status</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -308,7 +308,7 @@ export default function EmployeeDashboard() {
                                  backgroundColor: h.status === 'Hadir' ? (h.terlambat ? 'rgba(244, 63, 94, 0.1)' : 'rgba(16, 185, 129, 0.1)') : 'rgba(100, 116, 139, 0.1)',
                                  color: h.status === 'Hadir' ? (h.terlambat ? 'var(--danger)' : 'var(--success)') : 'var(--text-muted)'
                               }}>
-                                 {h.status === 'Hadir' ? (h.terlambat ? 'LAT' : 'OK') : h.status}
+                                 {h.status === 'Hadir' ? (h.terlambat ? 'LATE' : 'OK') : h.status}
                               </span>
                            </td>
                         </tr>
