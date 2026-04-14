@@ -3,6 +3,18 @@ import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
 export async function updateSession(request) {
+  const pathname = request.nextUrl.pathname
+  
+  // BYPASS PWA AND STATIC FILES IMMEDIATELY
+  const isPwaFile = pathname.endsWith('/manifest.json') || 
+                    pathname.endsWith('/sw.js') || 
+                    pathname.endsWith('.png') || 
+                    pathname.endsWith('.ico')
+  
+  if (isPwaFile) {
+    return NextResponse.next()
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -44,8 +56,7 @@ export async function updateSession(request) {
   const isAdminPage = adminOnlyPaths.includes(pathname)
 
   // If not logged in and not on login page, redirect to login
-  const isPwaFile = pathname.endsWith('manifest.json') || pathname.endsWith('sw.js')
-  if (!user && !isLoginPage && !isPwaFile) {
+  if (!user && !isLoginPage) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
