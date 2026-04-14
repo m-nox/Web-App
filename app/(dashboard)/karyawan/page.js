@@ -282,6 +282,7 @@ export default function KaryawanPage() {
           + Tambah Karyawan
         </button>
       </div>
+    </div>
 
       {selectedIds.length > 0 && (
         <div style={{ 
