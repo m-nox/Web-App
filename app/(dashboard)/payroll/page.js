@@ -506,6 +506,7 @@ export default function PayrollPage() {
                 <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bank Channel</th>
                 <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Amount</th>
                 <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Status</th>
+                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -536,21 +537,11 @@ export default function PayrollPage() {
                     </div>
                   </td>
                   <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ fontSize: '1.125rem', fontWeight: '900' }}>{formatCurrency(payroll.total_gaji)}</div>
+                    <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--primary)' }}>{payroll.nama_bank || 'BCA'}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{payroll.nomor_rekening || '-'}</div>
                   </td>
                   <td style={{ padding: '1.5rem 2rem' }}>
-                    <button
-                      onClick={() => setSelectedSlip(payroll)}
-                      className="btn"
-                      style={{
-                        backgroundColor: 'var(--primary-light)', color: 'var(--primary)',
-                        padding: '0.5rem 1rem', fontSize: '0.75rem', fontWeight: '800',
-                        gap: '0.5rem', borderRadius: '0.75rem'
-                      }}
-                    >
-                      <Eye style={{ width: '1rem', height: '1rem' }} />
-                      Lihat
-                    </button>
+                    <div style={{ fontSize: '1.125rem', fontWeight: '900' }}>{formatCurrency(payroll.total_gaji)}</div>
                   </td>
                   <td style={{ padding: '1.5rem 2rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -566,6 +557,20 @@ export default function PayrollPage() {
                         {payroll.status_pembayaran}
                       </span>
                     </div>
+                  </td>
+                  <td style={{ padding: '1.5rem 2rem' }}>
+                    <button
+                      onClick={() => setSelectedSlip(payroll)}
+                      className="btn"
+                      style={{
+                        backgroundColor: 'var(--primary-light)', color: 'var(--primary)',
+                        padding: '0.5rem 1rem', fontSize: '0.75rem', fontWeight: '800',
+                        gap: '0.5rem', borderRadius: '0.75rem'
+                      }}
+                    >
+                      <Eye style={{ width: '1rem', height: '1rem' }} />
+                      Lihat
+                    </button>
                   </td>
                 </tr>
               ))}
