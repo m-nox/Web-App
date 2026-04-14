@@ -116,9 +116,9 @@ export default function EmployeeDashboard() {
   const cardStyle = {
     backgroundColor: 'var(--bg-card)',
     borderRadius: 'var(--radius-lg)',
-    padding: '1rem',
+    padding: '0.75rem',
     border: '1px solid var(--border-color)',
-    marginBottom: '1rem'
+    marginBottom: '0.75rem'
   }
 
   return (
@@ -209,10 +209,10 @@ export default function EmployeeDashboard() {
             <span>IP: <strong>{attendance?.clientIp?.slice(0, 15)}...</strong></span>
           </div>
               
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '900', margin: '0 0 0.25rem 0', color: 'var(--text-dark)' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: '900', margin: '0 0 0.15rem 0', color: 'var(--text-dark)' }}>
             {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </h2>
-          <p style={{ color: 'var(--text-muted)', margin: '0 0 1rem 0', fontSize: '0.8rem' }}>
+          <p style={{ color: 'var(--text-muted)', margin: '0 0 0.75rem 0', fontSize: '0.75rem' }}>
             {time.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
           </p>
 
@@ -261,7 +261,7 @@ export default function EmployeeDashboard() {
         {/* Right Col: Stats & History */}
         <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          <div className="grid-stack" style={{ gap: '0.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
             <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.5rem' }}>
                <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1.15rem' }}>{totalOnTime}</h3>
                <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--success)', fontWeight: '800' }}>ON TIME</p>
@@ -293,13 +293,13 @@ export default function EmployeeDashboard() {
                   <tbody>
                      {history.slice(0, 5).map(h => (
                         <tr key={h.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                           <td style={{ padding: '0.75rem 0' }}>
+                           <td style={{ padding: '0.4rem 0' }}>
                               {new Date(h.tanggal).toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' })}
                            </td>
-                           <td style={{ padding: '0.75rem 0' }}>
+                           <td style={{ padding: '0.4rem 0' }}>
                               {h.jam_masuk || '-'} — {h.jam_keluar || '-'}
                            </td>
-                           <td style={{ padding: '0.75rem 0', textAlign: 'right' }}>
+                           <td style={{ padding: '0.4rem 0', textAlign: 'right' }}>
                               <span style={{ 
                                  padding: '0.2rem 0.4rem', 
                                  borderRadius: '4px', 
