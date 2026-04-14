@@ -2,6 +2,7 @@ const CACHE_NAME = 'lini-hris-v2';
 const STATIC_ASSETS = [
   '/login',
   '/manifest.json',
+  '/manifest.webmanifest',
   '/icon-192.png',
   '/icon-512.png',
   '/logo.png',
