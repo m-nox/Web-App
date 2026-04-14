@@ -293,18 +293,18 @@ export default function EmployeeDashboard() {
                   <tbody>
                      {history.slice(0, 5).map(h => (
                         <tr key={h.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                           <td style={{ padding: '0.25rem 0' }}>
+                           <td style={{ padding: '0.15rem 0' }}>
                               {new Date(h.tanggal).toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' })}
                            </td>
-                           <td style={{ padding: '0.25rem 0' }}>
+                           <td style={{ padding: '0.15rem 0' }}>
                               {h.jam_masuk || '-'} — {h.jam_keluar || '-'}
                            </td>
-                           <td style={{ padding: '0.4rem 0', textAlign: 'right' }}>
+                           <td style={{ padding: '0.15rem 0', textAlign: 'right' }}>
                               <span style={{ 
-                                 padding: '0.2rem 0.4rem', 
-                                 borderRadius: '4px', 
-                                 fontSize: '0.7rem',
-                                 fontWeight: '800',
+                                 padding: '0.1rem 0.3rem', 
+                                 borderRadius: '3px', 
+                                 fontSize: '0.6rem',
+                                 fontWeight: '900',
                                  backgroundColor: h.status === 'Hadir' ? (h.terlambat ? 'rgba(244, 63, 94, 0.1)' : 'rgba(16, 185, 129, 0.1)') : 'rgba(100, 116, 139, 0.1)',
                                  color: h.status === 'Hadir' ? (h.terlambat ? 'var(--danger)' : 'var(--success)') : 'var(--text-muted)'
                               }}>
