@@ -44,7 +44,8 @@ export async function updateSession(request) {
   const isAdminPage = adminOnlyPaths.includes(pathname)
 
   // If not logged in and not on login page, redirect to login
-  if (!user && !isLoginPage) {
+  const isPwaFile = pathname.endsWith('manifest.json') || pathname.endsWith('sw.js')
+  if (!user && !isLoginPage && !isPwaFile) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
