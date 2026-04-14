@@ -285,9 +285,9 @@ export default function EmployeeDashboard() {
                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem', tableLayout: 'fixed' }}>
                   <thead>
                      <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                        <th style={{ padding: '0.35rem 0', width: '25%' }}>Tgl</th>
-                        <th style={{ padding: '0.35rem 0', width: '55%' }}>Jam</th>
-                        <th style={{ padding: '0.35rem 0', width: '20%', textAlign: 'right' }}>Sts</th>
+                        <th style={{ padding: '0.35rem 0', width: '28%' }}>Tgl</th>
+                        <th style={{ padding: '0.35rem 0', width: '57%' }}>Jam</th>
+                        <th style={{ padding: '0.35rem 0', width: '15%', textAlign: 'center' }}>Sts</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -299,7 +299,7 @@ export default function EmployeeDashboard() {
                            <td style={{ padding: '0.15rem 0' }}>
                               {h.jam_masuk || '-'} — {h.jam_keluar || '-'}
                            </td>
-                           <td style={{ padding: '0.15rem 0', textAlign: 'right' }}>
+                           <td style={{ padding: '0.15rem 0', textAlign: 'center' }}>
                               <span style={{ 
                                  padding: '0.1rem 0.3rem', 
                                  borderRadius: '3px', 
