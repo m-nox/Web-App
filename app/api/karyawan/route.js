@@ -82,12 +82,44 @@ export async function POST(request) {
     
     return NextResponse.json({ 
       message: 'Karyawan dan Akun Login berhasil dibuat.', 
-      data,
+      data: data,
       credentials: {
         email: email,
         password: 'Hris123!'
       }
     }, { status: 201 })
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 })
+  }
+}
+
+export async function DELETE(request) {
+  const auth = await requireRole(['admin', 'hr'])
+  if (auth.error) return NextResponse.json({ error: auth.error }, { status: auth.status })
+
+  try {
+    const { ids } = await request.json()
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json({ error: 'Array ID diperlukan' }, { status: 400 })
+    }
+
+    // 1. Delete from Supabase Auth (Bulk)
+    // Note: admin.deleteUser doesn't support bulk, so we loop but keep it server-side
+    // This is the "burden" the user wants to avoid on the client, but it must happen server-side
+    const deletePromises = ids.map(id => supabaseAdmin.auth.admin.deleteUser(id))
+    await Promise.all(deletePromises)
+
+    // 2. Delete from Database (Bulk)
+    const { error } = await supabaseAdmin
+      .from('karyawan')
+      .delete()
+      .in('id', ids)
+
+    if (error) {
+      return NextResponse.json({ error: `Gagal hapus data DB: ${error.message}` }, { status: 400 })
+    }
+    
+    return NextResponse.json({ message: `${ids.length} Karyawan berhasil dihapus secara massal` })
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })
   }

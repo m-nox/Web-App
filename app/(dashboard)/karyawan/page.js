@@ -13,7 +13,8 @@ export default function KaryawanPage() {
   const [showModal, setShowModal] = useState(false)
   const [modalMode, setModalMode] = useState('add') // 'add', 'edit', 'delete'
   const [selectedKaryawan, setSelectedKaryawan] = useState(null)
-  const [visiblePasswords, setVisiblePasswords] = useState({}) // Tracks which passwords are unhidden
+  const [selectedIds, setSelectedIds] = useState([])
+  const [visiblePasswords, setVisiblePasswords] = useState({})
 
   // Form State
   const [formData, setFormData] = useState({
@@ -138,6 +139,28 @@ export default function KaryawanPage() {
     }))
   }
 
+  const toggleSelect = (id) => {
+    setSelectedIds(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    )
+  }
+
+  const toggleSelectAll = () => {
+    if (selectedIds.length === karyawanData.length) {
+      setSelectedIds([])
+    } else {
+      setSelectedIds(karyawanData.map(k => k.id))
+    }
+  }
+
+  const handleDeleteSelected = () => {
+    if (selectedIds.length === 0) return
+    const firstSelected = karyawanData.find(k => k.id === selectedIds[0])
+    setSelectedKaryawan(firstSelected) // Fallback for modal display if needed
+    setModalMode('delete')
+    setShowModal(true)
+  }
+
   const showPopup = (msg, type = 'success') => {
     setPopupMessage(msg)
     setPopupType(type)
@@ -189,10 +212,16 @@ export default function KaryawanPage() {
   const handleDelete = async () => {
     setProcessLoading(true)
     try {
-      const res = await fetch(`/api/karyawan/${selectedKaryawan.id}`, { method: 'DELETE' })
+      const res = await fetch('/api/karyawan', { 
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: selectedIds })
+      })
       if (res.ok) {
         handleCloseModal()
+        setSelectedIds([])
         fetchKaryawan()
+        showPopup(`${selectedIds.length} Karyawan berhasil dihapus`)
       } else {
         const err = await res.json()
         alert('Gagal: ' + err.error)
@@ -248,9 +277,36 @@ export default function KaryawanPage() {
           <h1 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '0.5rem' }}>Manajemen Karyawan</h1>
           <p style={{ color: 'var(--text-muted)' }}>Kelola profil, jabatan, dan struktur departemen karyawan Anda.</p>
         </div>
-        <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
-          + Tambah Karyawan
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          {selectedIds.length > 0 && (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', animation: 'fadeIn 0.2s ease-out' }}>
+              <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>{selectedIds.length} terpilih</span>
+              {selectedIds.length === 1 && (
+                <button 
+                  onClick={() => {
+                    const k = karyawanData.find(item => item.id === selectedIds[0])
+                    handleOpenModal('edit', k)
+                  }} 
+                  className="btn" 
+                  style={{ backgroundColor: 'var(--secondary)', padding: '0.5rem 1rem' }}
+                >
+                  Edit
+                </button>
+              )}
+              <button 
+                onClick={handleDeleteSelected} 
+                className="btn" 
+                style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.5rem 1rem' }}
+              >
+                Hapus ({selectedIds.length})
+              </button>
+              <div style={{ width: '1px', height: '24px', backgroundColor: 'var(--border-color)', margin: '0 0.5rem' }}></div>
+            </div>
+          )}
+          <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
+            + Tambah Karyawan
+          </button>
+        </div>
       </div>
 
       <div className="card glass">
@@ -258,12 +314,19 @@ export default function KaryawanPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
+                <th style={{ padding: '1.25rem 1rem', width: '40px' }}>
+                  <input 
+                    type="checkbox" 
+                    checked={selectedIds.length === karyawanData.length && karyawanData.length > 0} 
+                    onChange={toggleSelectAll}
+                    style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                  />
+                </th>
                 <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Nama Karyawan</th>
                 <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Departemen</th>
                 <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Jabatan</th>
                 <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Informasi Kontak</th>
                 <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Password</th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -273,7 +336,19 @@ export default function KaryawanPage() {
                 <tr><td colSpan="5" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>Belum ada data karyawan terdaftar.</td></tr>
               ) : (
                 karyawanData.map((k) => (
-                  <tr key={k.id} style={{ borderBottom: '1px solid var(--border-color)', transition: 'var(--transition)' }}>
+                  <tr key={k.id} style={{ 
+                    borderBottom: '1px solid var(--border-color)', 
+                    transition: 'var(--transition)',
+                    backgroundColor: selectedIds.includes(k.id) ? 'rgba(0, 174, 239, 0.05)' : 'transparent' 
+                  }}>
+                    <td style={{ padding: '1.25rem 1rem' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={selectedIds.includes(k.id)} 
+                        onChange={() => toggleSelect(k.id)}
+                        style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                      />
+                    </td>
                     <td style={{ padding: '1.25rem 1rem' }}>
                       <p style={{ fontWeight: '600', color: 'var(--text-dark)', margin: 0 }}>{k.nama_depan} {k.nama_belakang}</p>
                       <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>ID: {k.id.substring(0, 8)}...</p>
@@ -303,10 +378,6 @@ export default function KaryawanPage() {
                         </button>
                       </div>
                     </td>
-                    <td style={{ padding: '1.25rem 1rem', textAlign: 'right' }}>
-                      <button onClick={() => handleOpenModal('edit', k)} className="btn" style={{ marginRight: '0.5rem', backgroundColor: 'var(--secondary)', padding: '0.4rem 0.8rem' }}>Edit</button>
-                      <button onClick={() => handleOpenModal('delete', k)} className="btn" style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.4rem 0.8rem' }}>Hapus</button>
-                    </td>
                   </tr>
                 ))
               )}
@@ -325,9 +396,9 @@ export default function KaryawanPage() {
           <div className="card glass" style={{ width: '100%', maxWidth: '600px', padding: '2.5rem', maxHeight: '90vh', overflowY: 'auto' }}>
             {modalMode === 'delete' ? (
               <>
-                <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--danger)', fontWeight: '700' }}>Konfirmasi Penghapusan</h2>
+                <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--danger)', fontWeight: '700' }}>Konfirmasi Penghapusan Massal</h2>
                 <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', lineHeight: '1.6' }}>
-                  Apakah Anda yakin ingin menghapus data <strong>{selectedKaryawan?.nama_depan} {selectedKaryawan?.nama_belakang}</strong>? Seluruh data terkait karyawan ini akan dihapus dari sistem secara permanen.
+                  Apakah Anda yakin ingin menghapus <strong>{selectedIds.length} karyawan</strong> yang dipilih secara permanen? Tindakan ini tidak dapat dibatalkan.
                 </p>
                 <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
                   <button type="button" onClick={handleCloseModal} className="btn" style={{ backgroundColor: 'var(--secondary)', minWidth: '100px' }}>Batal</button>
