@@ -378,44 +378,44 @@ export default function PayrollPage() {
       <style dangerouslySetInnerHTML={{
         __html: `
         @media (max-width: 1024px) {
-          .summary-item { border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem; padding-right: 0 !important; }
+          .summary-item { border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.75rem; padding-right: 0 !important; }
           .summary-item:last-child { border-bottom: none; }
-          .summary-header { padding: 1.5rem !important; }
-          .summary-title { font-size: 1.5rem !important; }
-          .summary-card { padding: 1.5rem !important; gap: 1.5rem !important; border-radius: 1.5rem !important; }
+          .summary-header { padding: 1rem !important; }
+          .summary-title { font-size: 1.25rem !important; }
+          .summary-card { padding: 1rem !important; gap: 1rem !important; border-radius: 1rem !important; }
         }
         @media (max-width: 768px) {
-          .summary-header { flex-direction: column !important; align-items: stretch !important; gap: 1rem !important; }
-          .summary-actions { width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
-          .summary-value { font-size: 1.75rem !important; }
-          .summary-item h2 { font-size: 1.75rem !important; }
+          .summary-header { flex-direction: column !important; align-items: stretch !important; gap: 0.75rem !important; }
+          .summary-actions { width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
+          .summary-value { font-size: 1.25rem !important; }
+          .summary-item h2 { font-size: 1.25rem !important; }
         }
       `}} />
 
       {/* Header Section */}
-      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', padding: '1.5rem 2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1rem 1.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{
-            width: '3.5rem', height: '3.5rem', backgroundColor: 'var(--primary)',
-            borderRadius: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: '2.75rem', height: '2.75rem', backgroundColor: 'var(--primary)',
+            borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: 'var(--shadow-primary)'
           }}>
-            <Wallet style={{ width: '2rem', height: '2rem', color: 'white' }} />
+            <Wallet style={{ width: '1.5rem', height: '1.5rem', color: 'white' }} />
           </div>
           <div>
-            <h1 className="summary-title" style={{ fontSize: '1.75rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Payroll Hub</h1>
-            <p style={{ color: 'var(--text-muted)', margin: '0.15rem 0 0 0', fontWeight: '500', fontSize: '0.9rem' }}>Manage transparency, empower people.</p>
+            <h1 className="summary-title" style={{ fontSize: '1.25rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Payroll Hub</h1>
+            <p style={{ color: 'var(--text-muted)', margin: '0.1rem 0 0 0', fontWeight: '500', fontSize: '0.8rem' }}>Manage transparency and power people.</p>
           </div>
         </div>
 
-        <div className="summary-actions" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <button onClick={exportToPDF} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem', padding: '0.6rem 1rem', fontSize: '0.875rem' }}>
-            <FileText style={{ height: '1rem', width: '1rem', color: '#f43f5e' }} />
+        <div className="summary-actions" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <button onClick={exportToPDF} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem', fontSize: '0.8rem' }}>
+            <FileText style={{ height: '0.9rem', width: '0.9rem', color: '#f43f5e' }} />
             PDF Report
           </button>
 
-          <button onClick={exportToExcel} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.5rem', padding: '0.6rem 1rem', fontSize: '0.875rem' }}>
-            <Download style={{ height: '1rem', width: '1rem', color: '#10b981' }} />
+          <button onClick={exportToExcel} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem', fontSize: '0.8rem' }}>
+            <Download style={{ height: '0.9rem', width: '0.9rem', color: '#10b981' }} />
             Excel Data
           </button>
 
@@ -423,10 +423,10 @@ export default function PayrollPage() {
             onClick={() => setShowConfirm(true)}
             disabled={isGenerating}
             className="btn btn-primary"
-            style={{ gap: '0.6rem', padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
+            style={{ gap: '0.5rem', padding: '0.5rem 1rem', fontSize: '0.8rem' }}
           >
-            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '1.1rem', width: '1.1rem' }} /> : <Calculator style={{ height: '1.1rem', width: '1.1rem' }} />}
-            {isGenerating ? 'Calculating...' : 'Execute Payroll'}
+            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '0.9rem', width: '0.9rem' }} /> : <Calculator style={{ height: '0.9rem', width: '0.9rem' }} />}
+            {isGenerating ? 'Calculating' : 'Execute Payroll'}
           </button>
         </div>
       </div>
@@ -434,35 +434,34 @@ export default function PayrollPage() {
       {/* Summary Section */}
       <div className="summary-card" style={{
         background: 'linear-gradient(135deg, var(--primary) 0%, #0088ba 100%)',
-        borderRadius: '1.5rem',
-        padding: '2rem',
+        borderRadius: '1rem',
+        padding: '1.25rem 2rem',
         color: 'white',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: '2rem',
-        boxShadow: 'var(--shadow-lg)'
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '1.5rem',
+        boxShadow: 'var(--shadow-lg)',
+        marginBottom: '1.5rem'
       }}>
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '1.5rem' }}>
-          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Total Disbursement</p>
-          <h2 className="summary-value" style={{ fontSize: '2rem', fontWeight: '900', margin: 0 }}>
+        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.05)', paddingRight: '1rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Disbursement</p>
+          <h2 className="summary-value" style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0 }}>
             {formatCurrency(payrolls.reduce((acc, curr) => acc + (curr.total_gaji || 0), 0))}
           </h2>
           <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.5rem' }}>Beban operasional periode berjalan.</p>
         </div>
 
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.1)', paddingRight: '1.5rem' }}>
-          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Data Records</p>
-          <h2 className="summary-value" style={{ fontSize: '2rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Employees</h2>
-          <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Seluruh data gaji terproses.</p>
+        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.05)', paddingRight: '1rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Employees</p>
+          <h2 className="summary-value" style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Records</h2>
         </div>
 
         <div className="summary-item">
-          <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>Last Update</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <History style={{ height: '1.25rem', width: '1.25rem', color: '#60a5fa' }} />
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Last Update</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <History style={{ height: '1rem', width: '1rem', color: '#60a5fa' }} />
+            <h3 style={{ fontSize: '1rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
           </div>
-          <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Keamanan data terjamin.</p>
         </div>
       </div>
 
@@ -502,55 +501,55 @@ export default function PayrollPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead style={{ backgroundColor: 'var(--secondary)' }}>
               <tr>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Employee Profile</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Position</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Cycle</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bank Channel</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Amount</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Status</th>
-                <th style={{ padding: '1.25rem 2rem', fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Action</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Employee Profile</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Position</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Cycle</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bank Channel</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Amount</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Status</th>
+                <th style={{ padding: '0.75rem 1.25rem', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Action</th>
               </tr>
             </thead>
             <tbody>
               {payrolls.map((payroll) => (
                 <tr key={payroll.id} style={{ borderBottom: '1px solid var(--border-color)', transition: 'background-color 0.2s' }}>
-                  <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <td style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <div style={{
-                        width: '2.5rem', height: '2.5rem', backgroundColor: 'var(--primary-light)', color: 'var(--primary)',
-                        borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800'
+                        width: '2rem', height: '2rem', backgroundColor: 'var(--primary-light)', color: 'var(--primary)',
+                        borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '0.8rem'
                       }}>
                         {payroll.karyawan?.nama_depan[0]}
                       </div>
                       <div>
-                        <div style={{ fontWeight: '700' }}>{payroll.karyawan?.nama_depan} {payroll.karyawan?.nama_belakang}</div>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>ID: {payroll.id.slice(0, 8)}</div>
+                        <div style={{ fontWeight: '700', fontSize: '0.875rem' }}>{payroll.karyawan?.nama_depan} {payroll.karyawan?.nama_belakang}</div>
+                        <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>ID: {payroll.id.slice(0, 8)}</div>
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--text-dark)' }}>
+                  <td style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--text-dark)' }}>
                       {payroll.karyawan?.jabatan?.nama_jabatan || '-'}
                     </div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '600' }}>
+                  <td style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: '600' }}>
                       {new Date(payroll.periode_gaji).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' })}
                     </div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--primary)' }}>{payroll.nama_bank || 'BCA'}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{payroll.nomor_rekening || '-'}</div>
+                  <td style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--primary)' }}>{payroll.nama_bank || 'BCA'}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{payroll.nomor_rekening || '-'}</div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
-                    <div style={{ fontSize: '1.125rem', fontWeight: '900' }}>{formatCurrency(payroll.total_gaji)}</div>
+                  <td style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ fontSize: '0.9rem', fontWeight: '900' }}>{formatCurrency(payroll.total_gaji)}</div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
+                  <td style={{ padding: '1rem 1.25rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <span style={{
-                        padding: '0.35rem 0.75rem',
+                        padding: '0.25rem 0.6rem',
                         borderRadius: '999px',
-                        fontSize: '0.65rem',
+                        fontSize: '0.6rem',
                         fontWeight: '800',
                         textTransform: 'uppercase',
                         backgroundColor: payroll.status_pembayaran === 'Paid' ? '#ecfdf5' : '#fffbeb',
@@ -560,17 +559,17 @@ export default function PayrollPage() {
                       </span>
                     </div>
                   </td>
-                  <td style={{ padding: '1.5rem 2rem' }}>
+                  <td style={{ padding: '1rem 1.25rem' }}>
                     <button
                       onClick={() => setSelectedSlip(payroll)}
                       className="btn"
                       style={{
                         backgroundColor: 'var(--primary-light)', color: 'var(--primary)',
-                        padding: '0.5rem 1rem', fontSize: '0.75rem', fontWeight: '800',
-                        gap: '0.5rem', borderRadius: '0.75rem'
+                        padding: '0.4rem 0.75rem', fontSize: '0.7rem', fontWeight: '800',
+                        gap: '0.4rem', borderRadius: '0.5rem'
                       }}
                     >
-                      <Eye style={{ width: '1rem', height: '1rem' }} />
+                      <Eye style={{ width: '0.8rem', height: '0.8rem' }} />
                       Lihat
                     </button>
                   </td>
