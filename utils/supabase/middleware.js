@@ -46,7 +46,6 @@ export async function updateSession(request) {
   } = await supabase.auth.getUser()
 
   // Protect routes based on authentication status
-  const pathname = request.nextUrl.pathname
   const isLoginPage = pathname.startsWith('/login')
   const isEmployeePage = pathname.startsWith('/dashboard-karyawan')
   const isApiRoute = pathname.startsWith('/api')
