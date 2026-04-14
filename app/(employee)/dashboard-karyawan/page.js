@@ -188,6 +188,21 @@ export default function EmployeeDashboard() {
           }}>
             {isAtOffice ? 'Di Dalam Jaringan Kantor' : 'Di Luar Jaringan Kantor'}
           </div>
+          
+          {/* Permanent Network Monitoring Info */}
+          <div style={{ 
+            fontSize: '0.7rem', 
+            color: 'var(--text-muted)', 
+            marginTop: '-1rem', 
+            marginBottom: '1.5rem', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '0.2rem',
+            opacity: 0.8 
+          }}>
+            <span>IP Anda: <strong style={{ color: 'var(--text-dark)' }}>{attendance?.clientIp || 'Mendeteksi...'}</strong></span>
+            <span>IP Kantor: <strong style={{ color: 'var(--text-dark)' }}>{attendance?.officeIp || 'Mendeteksi...'}</strong></span>
+          </div>
               
           <h2 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0 0 0.5rem 0', color: 'var(--text-dark)' }}>
             {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
