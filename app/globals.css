@@ -236,7 +236,7 @@ p { font-size: clamp(0.8125rem, 3vw, 0.875rem); }
 }
 
 .responsive-table table {
-  min-width: 600px; /* Force scroll on very small screens */
+  width: 100%;
 }
 
 /* Responsive Grid Stacking */

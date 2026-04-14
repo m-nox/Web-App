@@ -179,7 +179,7 @@ export default function EmployeeDashboard() {
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'var(--section-gap)', flexWrap: 'wrap' }}>
         
         {/* Left Col: Live Clock & Actions */}
         <div style={{ flex: '1 1 300px', ...cardStyle, textAlign: 'center', padding: '1rem' }}>
@@ -259,7 +259,7 @@ export default function EmployeeDashboard() {
         </div>
 
         {/* Right Col: Stats & History */}
-        <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)' }}>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.4rem' }}>
             <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.4rem' }}>
@@ -282,12 +282,12 @@ export default function EmployeeDashboard() {
             {history.length === 0 ? (
                <p style={{ color: 'var(--text-muted)' }}>Belum ada data history.</p>
             ) : (
-               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem' }}>
+               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem', tableLayout: 'fixed' }}>
                   <thead>
                      <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                        <th style={{ padding: '0.35rem 0' }}>Tanggal</th>
-                        <th style={{ padding: '0.5rem 0' }}>Jam</th>
-                        <th style={{ padding: '0.5rem 0', textAlign: 'right' }}>Status</th>
+                        <th style={{ padding: '0.35rem 0', width: '25%' }}>Tgl</th>
+                        <th style={{ padding: '0.35rem 0', width: '55%' }}>Jam</th>
+                        <th style={{ padding: '0.35rem 0', width: '20%', textAlign: 'right' }}>Sts</th>
                      </tr>
                   </thead>
                   <tbody>
