@@ -46,7 +46,8 @@ export async function GET() {
     }
 
     // 4. Get Today's Attendance
-    const today = new Date().toLocaleDateString('en-CA')
+    // Get today's date in Jakarta (WIB - GMT+7)
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date())
     const { data: attendance } = await supabaseAdmin
       .from('absensi')
       .select('*')

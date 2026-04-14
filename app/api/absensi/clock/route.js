@@ -44,8 +44,18 @@ export async function POST(request) {
 
     if (!karyawan) return NextResponse.json({ error: 'Profil karyawan tidak ditemukan.' }, { status: 404 })
 
-    const today = new Date().toLocaleDateString('en-CA')
-    const now = new Date().toTimeString().split(' ')[0] // Always HH:MM:SS
+    // Get current time in Jakarta (WIB - GMT+7)
+    const jakartaDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date())
+    const jakartaTime = new Intl.DateTimeFormat('en-GB', { 
+      timeZone: 'Asia/Jakarta', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit', 
+      hour12: false 
+    }).format(new Date())
+
+    const today = jakartaDate
+    const now = jakartaTime
 
     // 4. Check Existing record (Admin Client)
     const { data: attendance } = await supabaseAdmin
