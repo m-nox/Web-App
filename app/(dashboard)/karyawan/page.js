@@ -278,36 +278,48 @@ export default function KaryawanPage() {
           <p style={{ color: 'var(--text-muted)' }}>Kelola profil, jabatan, dan struktur departemen karyawan Anda.</p>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          {selectedIds.length > 0 && (
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', animation: 'fadeIn 0.2s ease-out' }}>
-              <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>{selectedIds.length} terpilih</span>
-              {selectedIds.length === 1 && (
-                <button 
-                  onClick={() => {
-                    const k = karyawanData.find(item => item.id === selectedIds[0])
-                    handleOpenModal('edit', k)
-                  }} 
-                  className="btn" 
-                  style={{ backgroundColor: 'var(--secondary)', padding: '0.5rem 1rem' }}
-                >
-                  Edit
-                </button>
-              )}
-              <button 
-                onClick={handleDeleteSelected} 
-                className="btn" 
-                style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.5rem 1rem' }}
-              >
-                Hapus ({selectedIds.length})
-              </button>
-              <div style={{ width: '1px', height: '24px', backgroundColor: 'var(--border-color)', margin: '0 0.5rem' }}></div>
-            </div>
-          )}
-          <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
-            + Tambah Karyawan
-          </button>
-        </div>
+        <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
+          + Tambah Karyawan
+        </button>
       </div>
+
+      {selectedIds.length > 0 && (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'flex-end', 
+          alignItems: 'center', 
+          gap: '0.5rem', 
+          marginBottom: '0.75rem',
+          animation: 'fadeInUp 0.3s ease-out'
+        }}>
+          <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>{selectedIds.length} terpilih</span>
+          {selectedIds.length === 1 && (
+            <button 
+              onClick={() => {
+                const k = karyawanData.find(item => item.id === selectedIds[0])
+                handleOpenModal('edit', k)
+              }} 
+              className="btn" 
+              style={{ backgroundColor: 'var(--secondary)', padding: '0.4rem 1rem', fontSize: '0.875rem' }}
+            >
+              Edit
+            </button>
+          )}
+          <button 
+            onClick={handleDeleteSelected} 
+            className="btn" 
+            style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.4rem 1rem', fontSize: '0.875rem' }}
+          >
+            Hapus ({selectedIds.length})
+          </button>
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes fadeInUp {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+          `}} />
+        </div>
+      )}
 
       <div className="card glass">
         <div style={{ overflowX: 'auto' }}>
