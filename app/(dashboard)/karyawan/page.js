@@ -272,17 +272,17 @@ export default function KaryawanPage() {
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '0.2rem' }}>Manajemen Karyawan</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>Kelola profil, jabatan, dan struktur departemen.</p>
+          <h1 style={{ fontWeight: '700', marginBottom: '0.15rem' }}>Manajemen Karyawan</h1>
+          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Kelola profil, jabatan, dan struktur departemen.</p>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
-        <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}>
-          + Tambah Karyawan
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem' }} className="mobile-full">
+          <button onClick={() => handleOpenModal('add')} className="btn btn-primary mobile-full">
+            + Tambah Karyawan
+          </button>
+        </div>
       </div>
-    </div>
 
       {selectedIds.length > 0 && (
         <div style={{ 
@@ -291,8 +291,9 @@ export default function KaryawanPage() {
           alignItems: 'center', 
           gap: '0.5rem', 
           marginBottom: '0.75rem',
+          flexWrap: 'wrap',
           animation: 'fadeInUp 0.3s ease-out'
-        }}>
+        }} className="mobile-full">
           <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginRight: '0.5rem' }}>{selectedIds.length} terpilih</span>
           {selectedIds.length === 1 && (
             <button 
@@ -300,16 +301,16 @@ export default function KaryawanPage() {
                 const k = karyawanData.find(item => item.id === selectedIds[0])
                 handleOpenModal('edit', k)
               }} 
-              className="btn" 
-              style={{ backgroundColor: 'var(--secondary)', padding: '0.4rem 1rem', fontSize: '0.875rem' }}
+              className="btn mobile-full" 
+              style={{ backgroundColor: 'var(--secondary)', padding: '0.4rem 1rem' }}
             >
               Edit
             </button>
           )}
           <button 
             onClick={handleDeleteSelected} 
-            className="btn" 
-            style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.4rem 1rem', fontSize: '0.875rem' }}
+            className="btn mobile-full" 
+            style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.4rem 1rem' }}
           >
             Hapus ({selectedIds.length})
           </button>
@@ -323,7 +324,7 @@ export default function KaryawanPage() {
       )}
 
       <div className="card glass">
-        <div style={{ overflowX: 'auto' }}>
+        <div className="responsive-table">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
@@ -426,7 +427,7 @@ export default function KaryawanPage() {
                   {modalMode === 'add' ? 'Tambah Karyawan Baru' : 'Perbarui Data Karyawan'}
                 </h2>
                 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                <div className="grid-stack" style={{ marginBottom: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Nama Depan *</label>
                     <input type="text" required value={formData.nama_depan} onChange={(e) => setFormData({...formData, nama_depan: e.target.value})} placeholder="John" style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} />
@@ -437,7 +438,7 @@ export default function KaryawanPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                <div className="grid-stack" style={{ marginBottom: '1.25rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Email Perusahaan *</label>
                     <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="john.doe@company.com" style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} />
@@ -450,7 +451,7 @@ export default function KaryawanPage() {
 
                 <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.25rem', marginBottom: '1.25rem' }}>
                   <p style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1rem', color: 'var(--text-dark)' }}>Informasi Perbankan (Payroll)</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                  <div className="grid-stack">
                     <div>
                       <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Nama Bank</label>
                       <input 
@@ -476,7 +477,7 @@ export default function KaryawanPage() {
 
                 <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.25rem', marginBottom: '1.25rem' }}>
                   <p style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1rem', color: 'var(--text-dark)' }}>Detail Pekerjaan</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                  <div className="grid-stack">
                     <div>
                       <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Departemen</label>
                       <select 
@@ -508,39 +509,42 @@ export default function KaryawanPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2.5rem' }}>
-                  <div>
+                <div className="grid-stack" style={{ marginBottom: '2.5rem' }}>
+                  <div style={{ gridColumn: 'span 1' }}>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Alamat Domisili</label>
                     <textarea rows="3" value={formData.alamat} onChange={(e) => setFormData({...formData, alamat: e.target.value})} placeholder="Jl. Raya Utama No. 123..." style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', resize: 'vertical', background: 'white' }}></textarea>
                   </div>
-                  <div>
-                    <select 
-                      value={formData.role} 
-                      onChange={(e) => setFormData({...formData, role: e.target.value})} 
-                      style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }}
-                    >
-                      <option value="karyawan">Karyawan (Hanya Absen)</option>
-                      <option value="admin">Administrator (Akses Penuh)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Password Akun *</label>
-                    <div style={{ position: 'relative' }}>
-                      <input 
-                        type={visiblePasswords['form'] ? 'text' : 'password'} 
-                        required 
-                        value={formData.password} 
-                        onChange={(e) => setFormData({...formData, password: e.target.value})} 
-                        placeholder={modalMode === 'add' ? 'Hris123!' : 'Ganti password'} 
-                        style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} 
-                      />
-                      <button 
-                        type="button"
-                        onClick={() => togglePasswordVisibility('form')}
-                        style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Role Akses</label>
+                      <select 
+                        value={formData.role} 
+                        onChange={(e) => setFormData({...formData, role: e.target.value})} 
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }}
                       >
-                        {visiblePasswords['form'] ? <EyeOff size={16} /> : <Eye size={16} />}
-                      </button>
+                        <option value="karyawan">Karyawan (Hanya Absen)</option>
+                        <option value="admin">Administrator (Akses Penuh)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Password Akun *</label>
+                      <div style={{ position: 'relative' }}>
+                        <input 
+                          type={visiblePasswords['form'] ? 'text' : 'password'} 
+                          required 
+                          value={formData.password} 
+                          onChange={(e) => setFormData({...formData, password: e.target.value})} 
+                          placeholder={modalMode === 'add' ? 'Hris123!' : 'Ganti password'} 
+                          style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} 
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => togglePasswordVisibility('form')}
+                          style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
+                        >
+                          {visiblePasswords['form'] ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -176,94 +176,96 @@ export default function SlipGajiPage() {
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
-        <div>
-          <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0' }}>Halo, {activePayroll.karyawan?.nama_depan}!</h2>
-          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Slip gaji untuk periode bulan ini sudah tersedia.</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+        <div className="mobile-full">
+          <h2 style={{ fontSize: '1.25rem', margin: '0 0 0.25rem 0', fontWeight: '800' }}>Halo, {activePayroll.karyawan?.nama_depan}!</h2>
+          <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.85rem' }}>Slip gaji periode ini sudah tersedia.</p>
         </div>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div className="mobile-full" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <select 
             value={activePayroll.id}
             onChange={(e) => setActivePayroll(payrolls.find(p => p.id === e.target.value))}
-            style={{ padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
+            className="mobile-full"
+            style={{ padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', fontSize: '0.875rem' }}
           >
             {payrolls.map(p => (
               <option key={p.id} value={p.id}>
-                {new Date(p.periode_gaji).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
+                {new Date(p.periode_gaji).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' })}
               </option>
             ))}
           </select>
           <button 
              onClick={() => exportSlipToPDF(activePayroll)}
-             style={{ padding: '0.75rem 1.5rem', backgroundColor: 'var(--primary)', color: 'white', border: 'none', borderRadius: 'var(--radius-md)', cursor: 'pointer', fontWeight: 'bold' }}
+             className="btn btn-primary mobile-full"
+             style={{ padding: '0.6rem 1rem', borderRadius: 'var(--radius-md)', fontSize: '0.875rem' }}
           >
             Cetak PDF
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-        <div style={{ ...cardStyle, flex: 1, backgroundColor: 'var(--primary)', color: 'white' }}>
-           <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', opacity: 0.8 }}>Gaji Bersih (Take Home Pay)</p>
-           <h3 style={{ margin: 0, fontSize: '2rem' }}>{formatCurrency(activePayroll.total_gaji)}</h3>
+      <div className="grid-stack" style={{ marginBottom: '1.25rem', gap: '1rem' }}>
+        <div style={{ ...cardStyle, flex: 1, backgroundColor: 'var(--primary)', color: 'white', marginBottom: 0, padding: '1.25rem' }}>
+           <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', opacity: 0.8 }}>Take Home Pay</p>
+           <h3 style={{ margin: 0, fontWeight: '900' }}>{formatCurrency(activePayroll.total_gaji)}</h3>
         </div>
-        <div style={{ ...cardStyle, flex: 1 }}>
-           <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Total Pendapatan</p>
-           <h3 style={{ margin: 0, fontSize: '1.5rem' }}>{formatCurrency(grossPay)}</h3>
+        <div style={{ ...cardStyle, flex: 1, marginBottom: 0, padding: '1.25rem' }}>
+           <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Gross Pay</p>
+           <h3 style={{ margin: 0, fontWeight: '900' }}>{formatCurrency(grossPay)}</h3>
         </div>
-        <div style={{ ...cardStyle, flex: 1 }}>
-           <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Total Potongan</p>
-           <h3 style={{ margin: 0, fontSize: '1.5rem', color: 'var(--danger)' }}>-{formatCurrency(totalDeductions)}</h3>
+        <div style={{ ...cardStyle, flex: 1, marginBottom: 0, padding: '1.25rem' }}>
+           <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Deductions</p>
+           <h3 style={{ margin: 0, fontWeight: '900', color: 'var(--danger)' }}>-{formatCurrency(totalDeductions)}</h3>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+      <div className="grid-stack" style={{ gap: '1.25rem' }}>
         
         {/* Rincian Pendapatan */}
-        <div style={{ ...cardStyle, padding: 0, overflow: 'hidden' }}>
-          <h4 style={{ padding: '1.5rem', margin: 0, borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--secondary)' }}>
-            Rincian Pendapatan
+        <div style={{ ...cardStyle, padding: 0, overflow: 'hidden', marginBottom: 0 }}>
+          <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--secondary)', fontSize: '0.875rem', fontWeight: '800' }}>
+            EARNINGS
           </h4>
-          <div style={{ padding: '0 1.5rem' }}>
+          <div style={{ padding: '0 1.25rem' }}>
             {[
               { label: 'Gaji Pokok', value: activePayroll.gaji_pokok },
-              { label: 'Tunjangan Jabatan', value: activePayroll.tunjangan_jabatan },
-              { label: 'Tunjangan Makan', value: activePayroll.tunjangan_makan },
-              { label: 'Tunjangan Transport', value: activePayroll.tunjangan_transport },
-              { label: 'Tunjangan Khusus', value: activePayroll.tunjangan_keluarga },
+              { label: 'Tunj. Jabatan', value: activePayroll.tunjangan_jabatan },
+              { label: 'Tunj. Makan', value: activePayroll.tunjangan_makan },
+              { label: 'Tunj. Transport', value: activePayroll.tunjangan_transport },
+              { label: 'Tunj. Khusus', value: activePayroll.tunjangan_keluarga },
             ].map((item, idx) => (
-              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid var(--border-color)' }}>
-                <span>{item.label}</span>
-                <span style={{ fontWeight: 'bold' }}>{formatCurrency(item.value)}</span>
+              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.85rem 0', borderBottom: '1px solid var(--border-color)', fontSize: '0.875rem' }}>
+                <span style={{ color: 'var(--text-muted)' }}>{item.label}</span>
+                <span style={{ fontWeight: '700' }}>{formatCurrency(item.value)}</span>
               </div>
             ))}
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.5rem 0', fontWeight: 'bold' }}>
-              <span>Total Pendapatan</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.25rem 0', fontWeight: '900', fontSize: '0.95rem' }}>
+              <span>Total Earnings</span>
               <span style={{ color: 'var(--success)' }}>{formatCurrency(grossPay)}</span>
             </div>
           </div>
         </div>
 
         {/* Rincian Potongan */}
-        <div style={{ ...cardStyle, padding: 0, overflow: 'hidden' }}>
-          <h4 style={{ padding: '1.5rem', margin: 0, borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--secondary)' }}>
-            Rincian Potongan
+        <div style={{ ...cardStyle, padding: 0, overflow: 'hidden', marginBottom: 0 }}>
+          <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--secondary)', fontSize: '0.875rem', fontWeight: '800' }}>
+            DEDUCTIONS
           </h4>
-          <div style={{ padding: '0 1.5rem' }}>
+          <div style={{ padding: '0 1.25rem' }}>
             {[
-              { label: 'BPJS Kesehatan', value: activePayroll.potongan_bpjs_ks },
-              { label: 'BPJS Ketenagakerjaan', value: activePayroll.potongan_bpjs_tk },
+              { label: 'BPJS Kes', value: activePayroll.potongan_bpjs_ks },
+              { label: 'BPJS TK', value: activePayroll.potongan_bpjs_tk },
               { label: 'Pajak PPh21', value: activePayroll.pajak_pph21 },
-              { label: 'Terlambat Kehadiran', value: activePayroll.potongan_terlambat },
-              { label: 'Potongan Alpa', value: activePayroll.potongan_alfa },
+              { label: 'Late Deduction', value: activePayroll.potongan_terlambat },
+              { label: 'Alpa Deduction', value: activePayroll.potongan_alfa },
             ].map((item, idx) => (
-              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid var(--border-color)' }}>
-                <span>{item.label}</span>
-                <span style={{ fontWeight: 'bold', color: 'var(--danger)' }}>-{formatCurrency(item.value)}</span>
+              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.85rem 0', borderBottom: '1px solid var(--border-color)', fontSize: '0.875rem' }}>
+                <span style={{ color: 'var(--text-muted)' }}>{item.label}</span>
+                <span style={{ fontWeight: '700', color: 'var(--danger)' }}>-{formatCurrency(item.value)}</span>
               </div>
             ))}
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.5rem 0', fontWeight: 'bold' }}>
-              <span>Total Potongan</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.25rem 0', fontWeight: '900', fontSize: '0.95rem' }}>
+              <span>Total Deductions</span>
               <span style={{ color: 'var(--danger)' }}>-{formatCurrency(totalDeductions)}</span>
             </div>
           </div>

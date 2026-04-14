@@ -82,50 +82,46 @@ export default function LaporanPage() {
         position: 'relative', 
         backgroundColor: '#111827', 
         borderRadius: '1.25rem', 
-        padding: '1.5rem', 
+        padding: 'var(--page-padding)', 
         overflow: 'hidden', 
         boxShadow: 'var(--shadow-lg)',
         color: 'white'
       }}>
-        <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <div style={{ 
               display: 'inline-flex', 
               alignItems: 'center', 
-              padding: '0.4rem 0.75rem', 
+              padding: '0.35rem 0.65rem', 
               backgroundColor: 'rgba(31, 41, 55, 0.5)', 
               border: '1px solid rgba(55, 65, 81, 0.5)', 
               borderRadius: '0.75rem', 
-              fontSize: '0.7rem', 
+              fontSize: '0.65rem', 
               fontWeight: '700',
               width: 'fit-content'
             }}>
-              <Zap style={{ height: '0.875rem', width: '0.875rem', marginRight: '0.4rem', color: '#818cf8' }} />
+              <Zap style={{ height: '0.75rem', width: '0.75rem', marginRight: '0.4rem', color: '#818cf8' }} />
               Live Reporting System
             </div>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: '900', letterSpacing: '-0.02em', margin: 0, lineHeight: '1.2' }}>
+            <h1 style={{ fontWeight: '900', letterSpacing: '-0.02em', margin: 0, lineHeight: '1.1' }}>
               Executive Dashboard
             </h1>
-            <p style={{ color: '#9ca3af', fontSize: '0.9rem', maxWidth: '24rem', fontWeight: '500', margin: 0 }}>
+            <p style={{ color: '#9ca3af', maxWidth: '24rem', fontWeight: '500', margin: 0 }}>
               Analisis operasional, kehadiran, dan anggaran keuangan perusahaan.
             </p>
           </div>
           
-          <button className="btn btn-primary" style={{ padding: '0.75rem 1.25rem', width: 'fit-content', fontSize: '0.875rem', borderRadius: '0.75rem' }}>
-            <Download style={{ marginRight: '0.5rem', height: '1.15rem', width: '1.15rem' }} />
+          <button className="btn btn-primary" style={{ padding: '0.6rem 1rem', width: 'fit-content', fontSize: '0.8rem', borderRadius: '0.75rem' }}>
+            <Download style={{ marginRight: '0.5rem', height: '1rem', width: '1rem' }} />
             Generate Summary
           </button>
         </div>
       </div>
 
       {/* Primary Stats Grid */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-        gap: '2rem' 
-      }}>
+      <div className="grid-stack">
         <StatCard 
-          icon={<Users style={{ width: '2rem', height: '2rem' }} />} 
+          icon={<Users style={{ width: '1.5rem', height: '1.5rem' }} />} 
           label="Tenaga Kerja" 
           value={stats.totalEmployees} 
           trend="+12% bulan ini"
@@ -134,36 +130,36 @@ export default function LaporanPage() {
           description="Total personel aktif"
         />
         <StatCard 
-          icon={<Clock style={{ width: '2rem', height: '2rem' }} />} 
-          label="Presensi Hari Ini" 
+          icon={<Clock style={{ width: '1.5rem', height: '1.5rem' }} />} 
+          label="Kehadiran" 
           value={`${Math.round((stats.presentToday / (stats.totalEmployees || 1)) * 100)}%`} 
           trend="Sangat Baik"
           color="#10b981"
           bg="#ecfdf5"
-          description={`${stats.presentToday} Karyawan Hadir`}
+          description={`${stats.presentToday} Hadir`}
         />
         <StatCard 
-          icon={<CalendarDays style={{ width: '2rem', height: '2rem' }} />} 
+          icon={<CalendarDays style={{ width: '1.5rem', height: '1.5rem' }} />} 
           label="Cuti Pending" 
           value={stats.pendingLeaves} 
           trend={stats.pendingLeaves > 5 ? "Critical" : "Stable"}
           color="#f59e0b"
           bg="#fffbeb"
-          description="Menunggu persetujuan"
+          description="Sisa persetujuan"
           alert={stats.pendingLeaves > 0}
         />
         <StatCard 
-          icon={<TrendingUp style={{ width: '2rem', height: '2rem' }} />} 
+          icon={<TrendingUp style={{ width: '1.5rem', height: '1.5rem' }} />} 
           label="Budget Payroll" 
           value={formatCurrency(stats.totalPayroll)} 
           trend="On Budget"
           color="#f43f5e"
           bg="#fff1f2"
-          description="Estimasi bulan berjalan"
+          description="Bulan berjalan"
         />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
+      <div className="grid-stack">
         {/* Main Chart Area */}
         <div className="card" style={{ padding: '1.5rem', flex: 2 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>

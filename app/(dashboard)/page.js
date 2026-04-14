@@ -90,59 +90,59 @@ export default function Home() {
 
   return (
     <main>
-      <header style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.25rem', background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <h1 style={{ fontWeight: '800', marginBottom: '0.15rem', background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             HRIS Dashboard
           </h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Manajemen Sumber Daya Manusia Terintegrasi.</p>
+          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Manajemen Sumber Daya Manusia Terintegrasi.</p>
         </div>
-        <Link href="/karyawan" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>
+        <Link href="/karyawan" className="btn btn-primary mobile-full">
           Kelola Karyawan
         </Link>
       </header>
 
       {/* Profile Section */}
       {profile && (
-        <div className="card glass" style={{ marginBottom: '1.5rem', padding: '1rem', borderLeft: '4px solid var(--primary)', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-          <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: 'var(--primary)', fontWeight: 'bold' }}>
+        <div className="card glass" style={{ marginBottom: '1.25rem', padding: '0.875rem', borderLeft: '4px solid var(--primary)', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', color: 'var(--primary)', fontWeight: 'bold' }}>
             {profile.nama_depan[0]}{profile.nama_belakang?.[0] || ''}
           </div>
-          <div>
-            <h2 style={{ fontSize: '1.15rem', fontWeight: '700', margin: 0 }}>Selamat Datang, {profile.nama_depan}!</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0 }}>{profile.jabatan?.nama_jabatan || 'Karyawan'} • {profile.departemen?.nama_departemen || 'Umum'}</p>
+          <div style={{ minWidth: '200px' }}>
+            <h2 style={{ fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Selamat Datang, {profile.nama_depan}!</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', margin: 0 }}>{profile.jabatan?.nama_jabatan || 'Karyawan'} • {profile.departemen?.nama_departemen || 'Umum'}</p>
           </div>
         </div>
       )}
 
       {/* Stats Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div className="card glass" style={{ borderLeft: '4px solid var(--primary)', padding: '1rem' }}>
-          <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '600', textTransform: 'uppercase' }}>Total Karyawan</h3>
-          <p style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--primary)', margin: 0 }}>
+      <div className="grid-stack" style={{ marginBottom: '1.25rem' }}>
+        <div className="card glass" style={{ borderLeft: '4px solid var(--primary)' }}>
+          <h3 style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Karyawan</h3>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--primary)', margin: 0 }}>
             {loading ? '...' : stats.totalKaryawan}
           </p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Terdaftar di sistem</p>
+          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Terdaftar di sistem</p>
         </div>
         
-        <div className="card glass" style={{ borderLeft: '4px solid var(--success)', padding: '1rem' }}>
-          <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '600', textTransform: 'uppercase' }}>Hadir Hari Ini</h3>
-          <p style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--success)', margin: 0 }}>
+        <div className="card glass" style={{ borderLeft: '4px solid var(--success)' }}>
+          <h3 style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hadir Hari Ini</h3>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--success)', margin: 0 }}>
             {loading ? '...' : stats.hadirToday}
           </p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Kehadiran real-time</p>
+          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Kehadiran real-time</p>
         </div>
 
-        <div className="card glass" style={{ borderLeft: '4px solid var(--warning)', padding: '1rem' }}>
-          <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '600', textTransform: 'uppercase' }}>Cuti (Pending)</h3>
-          <p style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--warning)', margin: 0 }}>
+        <div className="card glass" style={{ borderLeft: '4px solid var(--warning)' }}>
+          <h3 style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Cuti (Pending)</h3>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--warning)', margin: 0 }}>
             {loading ? '...' : stats.pendingCuti}
           </p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Menunggu persetujuan</p>
+          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Menunggu persetujuan</p>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+      <div className="grid-stack" style={{ marginBottom: '1.25rem' }}>
         {/* Attendance Summary */}
         <section className="card glass" style={{ padding: '1.25rem' }}>
           <h2 style={{ fontSize: '1.15rem', marginBottom: '1rem', fontWeight: '700' }}>Presensi Hari Ini</h2>
@@ -197,12 +197,12 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="card glass" style={{ background: 'var(--primary-light)', border: '1px solid var(--primary)', padding: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.15rem', marginBottom: '0.5rem', fontWeight: '700', color: 'var(--primary)' }}>Pintasan Cepat</h2>
-        <p style={{ marginBottom: '1rem', color: 'var(--text-dark)', fontSize: '0.875rem' }}>Akses cepat ke manajemen data.</p>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <Link href="/karyawan" className="btn btn-primary" style={{ flex: 1, textDecoration: 'none', textAlign: 'center' }}>Manajemen Karyawan</Link>
-          <Link href="/rekap-absensi" className="btn" style={{ flex: 1, backgroundColor: 'white', border: '1px solid var(--primary)', color: 'var(--primary)', textDecoration: 'none', textAlign: 'center' }}>Rekap Absensi</Link>
+      <section className="card glass" style={{ background: 'var(--primary-light)', border: '1px solid var(--primary)', padding: '1rem' }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '0.25rem', fontWeight: '700', color: 'var(--primary)' }}>Pintasan Cepat</h2>
+        <p style={{ marginBottom: '1rem', color: 'var(--text-dark)' }}>Akses cepat ke manajemen data.</p>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <Link href="/karyawan" className="btn btn-primary mobile-full" style={{ flex: 1, textDecoration: 'none', textAlign: 'center' }}>Manajemen Karyawan</Link>
+          <Link href="/rekap-absensi" className="btn mobile-full" style={{ flex: 1, backgroundColor: 'white', border: '1px solid var(--primary)', color: 'var(--primary)', textDecoration: 'none', textAlign: 'center' }}>Rekap Absensi</Link>
         </div>
       </section>
     </main>

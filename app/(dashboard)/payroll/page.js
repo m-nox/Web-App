@@ -374,113 +374,89 @@ export default function PayrollPage() {
         </div>
       )}
 
-      {/* Responsive Styles Injection */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @media (max-width: 1024px) {
-          .summary-item { border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.75rem; padding-right: 0 !important; }
-          .summary-item:last-child { border-bottom: none; }
-          .summary-header { padding: 1rem !important; }
-          .summary-title { font-size: 1.25rem !important; }
-          .summary-card { padding: 1rem !important; gap: 1rem !important; border-radius: 1rem !important; }
-        }
-        @media (max-width: 768px) {
-          .summary-header { flex-direction: column !important; align-items: stretch !important; gap: 0.75rem !important; }
-          .summary-actions { width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
-          .summary-value { font-size: 1.25rem !important; }
-          .summary-item h2 { font-size: 1.25rem !important; }
-        }
-      `}} />
-
       {/* Header Section */}
-      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1rem 1.5rem', marginBottom: '1.5rem' }}>
+      <div className="card summary-header" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: 'var(--page-padding)', marginBottom: '1.25rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{
-            width: '2.75rem', height: '2.75rem', backgroundColor: 'var(--primary)',
+            width: '2.5rem', height: '2.5rem', backgroundColor: 'var(--primary)',
             borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: 'var(--shadow-primary)'
           }}>
-            <Wallet style={{ width: '1.5rem', height: '1.5rem', color: 'white' }} />
+            <Wallet style={{ width: '1.25rem', height: '1.25rem', color: 'white' }} />
           </div>
           <div>
-            <h1 className="summary-title" style={{ fontSize: '1.25rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Payroll Hub</h1>
-            <p style={{ color: 'var(--text-muted)', margin: '0.1rem 0 0 0', fontWeight: '500', fontSize: '0.8rem' }}>Manage transparency and power people.</p>
+            <h1 className="summary-title" style={{ fontWeight: '900', margin: 0, letterSpacing: '-0.02em', fontSize: '1.25rem' }}>Payroll Hub</h1>
+            <p className="mobile-hide" style={{ color: 'var(--text-muted)', margin: '0.1rem 0 0 0', fontWeight: '500', fontSize: '0.75rem' }}>Manage transparency and power people.</p>
           </div>
         </div>
 
         <div className="summary-actions" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <button onClick={exportToPDF} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem', fontSize: '0.8rem' }}>
-            <FileText style={{ height: '0.9rem', width: '0.9rem', color: '#f43f5e' }} />
-            PDF Report
+          <button onClick={exportToPDF} className="btn mobile-full" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem' }}>
+            <FileText style={{ height: '0.8rem', width: '0.8rem', color: '#f43f5e' }} />
+            PDF
           </button>
-
-          <button onClick={exportToExcel} className="btn" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem', fontSize: '0.8rem' }}>
-            <Download style={{ height: '0.9rem', width: '0.9rem', color: '#10b981' }} />
-            Excel Data
+          <button onClick={exportToExcel} className="btn mobile-full" style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', gap: '0.4rem', padding: '0.5rem 0.8rem' }}>
+            <Download style={{ height: '0.8rem', width: '0.8rem', color: '#10b981' }} />
+            Excel
           </button>
-
           <button
             onClick={() => setShowConfirm(true)}
             disabled={isGenerating}
-            className="btn btn-primary"
-            style={{ gap: '0.5rem', padding: '0.5rem 1rem', fontSize: '0.8rem' }}
+            className="btn btn-primary mobile-full"
+            style={{ gap: '0.5rem', padding: '0.5rem 0.8rem' }}
           >
-            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '0.9rem', width: '0.9rem' }} /> : <Calculator style={{ height: '0.9rem', width: '0.9rem' }} />}
+            {isGenerating ? <Loader2 style={{ animation: 'spin 1s linear infinite', height: '0.8rem', width: '0.8rem' }} /> : <Calculator style={{ height: '0.8rem', width: '0.8rem' }} />}
             {isGenerating ? 'Calculating' : 'Execute Payroll'}
           </button>
         </div>
       </div>
 
       {/* Summary Section */}
-      <div className="summary-card" style={{
+      <div className="grid-stack" style={{
         background: 'linear-gradient(135deg, var(--primary) 0%, #0088ba 100%)',
         borderRadius: '1rem',
-        padding: '1.25rem 2rem',
+        padding: '0.875rem 1.25rem',
         color: 'white',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '1.5rem',
         boxShadow: 'var(--shadow-lg)',
-        marginBottom: '1.5rem'
+        marginBottom: '1.25rem'
       }}>
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.05)', paddingRight: '1rem' }}>
-          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Disbursement</p>
-          <h2 className="summary-value" style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0 }}>
+        <div style={{ padding: '0.5rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.25rem' }}>Disbursement</p>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '900', margin: 0 }}>
             {formatCurrency(payrolls.reduce((acc, curr) => acc + (curr.total_gaji || 0), 0))}
           </h2>
-          <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.5rem' }}>Beban operasional periode berjalan.</p>
         </div>
 
-        <div className="summary-item" style={{ borderRight: '1px solid rgba(255, 255, 255, 0.05)', paddingRight: '1rem' }}>
-          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Employees</p>
-          <h2 className="summary-value" style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Records</h2>
+        <div style={{ padding: '0.5rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.25rem' }}>Employees</p>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '900', margin: 0 }}>{payrolls.length} Records</h2>
         </div>
 
-        <div className="summary-item">
-          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>Last Update</p>
+        <div style={{ padding: '0.5rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.25rem' }}>Last Update</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <History style={{ height: '1rem', width: '1rem', color: '#60a5fa' }} />
-            <h3 style={{ fontSize: '1rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
+            <h3 style={{ fontSize: '0.9rem', fontWeight: '800', margin: 0 }}>{new Date().toLocaleDateString('id-ID')}</h3>
           </div>
         </div>
       </div>
 
       {/* Ledger Table Section */}
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '2rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0, letterSpacing: '-0.02em' }}>Financial Ledger</h3>
+        <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <h3 style={{ margin: 0 }}>Financial Ledger</h3>
 
           {/* Period Filter Relocated Here */}
-          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', backgroundColor: 'var(--secondary)', padding: '0.5rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
-            <Calendar style={{ width: '1rem', height: '1rem', color: 'var(--primary)' }} />
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', backgroundColor: 'var(--secondary)', padding: '0.4rem 0.75rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+            <Calendar style={{ width: '0.9rem', height: '0.9rem', color: 'var(--primary)' }} />
             <select
               value={filterMonth}
               onChange={(e) => setFilterMonth(e.target.value)}
-              style={{ border: 'none', background: 'none', outline: 'none', fontSize: '0.875rem', fontWeight: '700', cursor: 'pointer' }}
+              style={{ border: 'none', background: 'none', outline: 'none', fontSize: '0.8rem', fontWeight: '700', cursor: 'pointer' }}
             >
               {Array.from({ length: 12 }, (_, i) => (
                 <option key={i + 1} value={i + 1}>
-                  {['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'][i]}
+                  {['Janu', 'Febr', 'Mare', 'Apri', 'Mei', 'Juni', 'Juli', 'Agus', 'Sept', 'Okto', 'Nove', 'Dese'][i]}
                 </option>
               ))}
             </select>
@@ -488,7 +464,7 @@ export default function PayrollPage() {
             <select
               value={filterYear}
               onChange={(e) => setFilterYear(e.target.value)}
-              style={{ border: 'none', background: 'none', outline: 'none', fontSize: '0.875rem', fontWeight: '700', cursor: 'pointer' }}
+              style={{ border: 'none', background: 'none', outline: 'none', fontSize: '0.8rem', fontWeight: '700', cursor: 'pointer' }}
             >
               {[2024, 2025, 2026, 2027].map(y => (
                 <option key={y} value={y}>{y}</option>
@@ -497,7 +473,7 @@ export default function PayrollPage() {
           </div>
         </div>
 
-        <div style={{ overflowX: 'auto' }}>
+        <div className="responsive-table">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead style={{ backgroundColor: 'var(--secondary)' }}>
               <tr>
@@ -599,41 +575,42 @@ export default function PayrollPage() {
               <X style={{ width: '2rem', height: '2rem' }} />
             </button>
 
-            <div style={{ padding: '3rem' }}>
+            <div style={{ padding: 'var(--page-padding)' }}>
               {/* Header / KOP */}
-              <div style={{ position: 'relative', textAlign: 'center', marginBottom: '1.5rem', borderBottom: '2px solid var(--text-dark)', paddingBottom: '1rem' }}>
-                <div style={{ position: 'absolute', left: 0, top: 0 }}>
-                  <div style={{ width: '3.5rem', height: '3.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ position: 'relative', textAlign: 'center', marginBottom: '1.25rem', borderBottom: '2px solid var(--text-dark)', paddingBottom: '0.75rem' }}>
+                <div className="mobile-hide" style={{ position: 'absolute', left: 0, top: 0 }}>
+                  <div style={{ width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img src="/logo.png" alt="Liniswara Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: '900', color: 'var(--primary)', marginTop: '0.25rem' }}>{COMPANY_INFO.name}</div>
+                  <div style={{ fontSize: '0.7rem', fontWeight: '900', color: 'var(--primary)', marginTop: '0.15rem' }}>{COMPANY_INFO.name}</div>
                 </div>
 
-                <h2 style={{ fontSize: '1.75rem', fontWeight: '900', margin: 0, color: 'var(--text-dark)' }}>
-                  SLIP GAJI KARYAWAN {['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'][filterMonth - 1]} {filterYear}
+                <h2 style={{ fontWeight: '900', margin: 0, color: 'var(--text-dark)' }}>
+                  SLIP GAJI {['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AGU', 'SEP', 'OKT', 'NOV', 'DES'][filterMonth - 1]} {filterYear}
                 </h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '500', maxWidth: '400px', margin: '0.5rem auto' }}>
-                  {COMPANY_INFO.address}
+                <p className="mobile-hide" style={{ color: 'var(--text-muted)', fontSize: '0.75rem', maxWidth: '400px', margin: '0.25rem auto' }}>
+                  {COMPANY_INFO.address.split('\n')[0]}
                 </p>
               </div>
 
               {/* Profile Bar */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>Nama</span> <span style={{ marginRight: '10px' }}>:</span> <span style={{ fontWeight: '800' }}>{selectedSlip.karyawan?.nama_depan} {selectedSlip.karyawan?.nama_belakang}</span></div>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>NIK</span> <span style={{ marginRight: '10px' }}>:</span> <span>{selectedSlip.karyawan?.id?.slice(0, 8).toUpperCase()}</span></div>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>Rek</span> <span style={{ marginRight: '10px' }}>:</span> <span>{selectedSlip.nomor_rekening || '-'} ({selectedSlip.nama_bank || 'BCA'})</span></div>
+              <div className="grid-stack" style={{ marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>Nama</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontWeight: '800', fontSize: '0.8rem' }}>{selectedSlip.karyawan?.nama_depan} {selectedSlip.karyawan?.nama_belakang}</span></div>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>NIK</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontSize: '0.8rem' }}>{selectedSlip.karyawan?.id?.slice(0, 8).toUpperCase()}</span></div>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>Rek</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontSize: '0.8rem' }}>{selectedSlip.nomor_rekening || '-'} ({selectedSlip.nama_bank || 'BCA'})</span></div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>Divisi</span> <span style={{ marginRight: '10px' }}>:</span> <span>Produksi</span></div>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>Jabatan</span> <span style={{ marginRight: '10px' }}>:</span> <span>{selectedSlip.karyawan?.jabatan?.nama_jabatan || '-'}</span></div>
-                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.85rem', fontWeight: '600' }}>Tanggal</span> <span style={{ marginRight: '10px' }}>:</span> <span>{new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>Divisi</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontSize: '0.8rem' }}>Produksi</span></div>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>Jabatan</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontSize: '0.8rem' }}>{selectedSlip.karyawan?.jabatan?.nama_jabatan || '-'}</span></div>
+                  <div style={{ display: 'flex' }}><span style={{ width: '80px', fontSize: '0.8rem', fontWeight: '600' }}>Tanggal</span> <span style={{ marginRight: '8px' }}>:</span> <span style={{ fontSize: '0.8rem' }}>{new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span></div>
                 </div>
               </div>
 
               {/* Items Table */}
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem' }}>
-                <thead>
+              <div className="responsive-table">
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
                   <tr style={{ backgroundColor: 'var(--secondary)', borderTop: '1px solid var(--text-dark)', borderBottom: '1px solid var(--text-dark)' }}>
                     <th style={{ padding: '0.75rem', textAlign: 'center', width: '50px', fontSize: '0.75rem', fontWeight: '800' }}>NO.</th>
                     <th style={{ padding: '0.75rem', textAlign: 'left', fontSize: '0.75rem', fontWeight: '800' }}>KETERANGAN</th>
@@ -678,35 +655,36 @@ export default function PayrollPage() {
                     <td style={{ textAlign: 'right', padding: '1rem', fontSize: '1.25rem', color: 'var(--primary)' }}>{formatCurrency(selectedSlip.total_gaji)}</td>
                   </tr>
                 </tbody>
-              </table>
+                </table>
+              </div>
 
               {/* Attendance Summary Section in Modal */}
-              <div style={{ backgroundColor: 'var(--secondary)', padding: '1.5rem', borderRadius: '1rem', marginBottom: '2rem' }}>
-                <h4 style={{ margin: '0 0 1rem 0', fontSize: '0.9rem', fontWeight: '800', color: 'var(--text-dark)' }}>LAPORAN KEHADIRAN & KETEPATAN WAKTU</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+              <div style={{ backgroundColor: 'var(--secondary)', padding: '1rem', borderRadius: '0.75rem', marginBottom: '1.5rem' }}>
+                <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-dark)' }}>KEHADIRAN & KETEPATAN WAKTU</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: '0.75rem' }}>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>HADIR</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900' }}>{selectedSlip.jumlah_hadir || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>HADIR</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900' }}>{selectedSlip.jumlah_hadir || 0}</div>
                    </div>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>ALPA</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900', color: '#ef4444' }}>{selectedSlip.jumlah_alfa || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>ALPA</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900', color: '#ef4444' }}>{selectedSlip.jumlah_alfa || 0}</div>
                    </div>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>TERLAMBAT</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900', color: '#f59e0b' }}>{selectedSlip.jumlah_terlambat || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>TELAT</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900', color: '#f59e0b' }}>{selectedSlip.jumlah_terlambat || 0}</div>
                    </div>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>IZIN</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900' }}>{selectedSlip.jumlah_izin || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>IZIN</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900' }}>{selectedSlip.jumlah_izin || 0}</div>
                    </div>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>SAKIT</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900' }}>{selectedSlip.jumlah_sakit || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>SAKIT</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900' }}>{selectedSlip.jumlah_sakit || 0}</div>
                    </div>
                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '700' }}>CUTI</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: '900' }}>{selectedSlip.jumlah_cuti || 0}</div>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '700' }}>CUTI</div>
+                      <div style={{ fontSize: '1rem', fontWeight: '900' }}>{selectedSlip.jumlah_cuti || 0}</div>
                    </div>
                 </div>
               </div>
@@ -719,27 +697,27 @@ export default function PayrollPage() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-around', textAlign: 'center', marginTop: '4rem' }}>
-                <div style={{ width: '200px' }}>
-                  <p style={{ fontSize: '0.875rem', marginBottom: '3rem' }}>Dibuat Oleh</p>
-                  <p style={{ fontWeight: '900', textDecoration: 'underline', margin: 0 }}>{COMPANY_INFO.signatures.hr.name}</p>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{COMPANY_INFO.signatures.hr.title}</p>
+              <div className="grid-stack" style={{ textAlign: 'center', marginTop: '2rem' }}>
+                <div style={{ width: '100%' }}>
+                  <p style={{ fontSize: '0.8rem', marginBottom: '2rem' }}>Dibuat Oleh</p>
+                  <p style={{ fontWeight: '900', textDecoration: 'underline', margin: 0, fontSize: '0.8rem' }}>{COMPANY_INFO.signatures.hr.name}</p>
+                  <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{COMPANY_INFO.signatures.hr.title}</p>
                 </div>
-                <div style={{ width: '200px' }}>
-                  <p style={{ fontSize: '0.875rem', marginBottom: '3rem' }}>Dibayar Oleh</p>
-                  <p style={{ fontWeight: '900', textDecoration: 'underline', margin: 0 }}>{COMPANY_INFO.signatures.finance.name}</p>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{COMPANY_INFO.signatures.finance.title}</p>
+                <div style={{ width: '100%' }}>
+                  <p style={{ fontSize: '0.8rem', marginBottom: '2rem' }}>Dibayar Oleh</p>
+                  <p style={{ fontWeight: '900', textDecoration: 'underline', margin: 0, fontSize: '0.8rem' }}>{COMPANY_INFO.signatures.finance.name}</p>
+                  <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{COMPANY_INFO.signatures.finance.title}</p>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+              <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center', gap: '1rem' }}>
                 <button
                   onClick={() => exportSlipToPDF(selectedSlip)}
-                  className="btn btn-primary"
-                  style={{ gap: '0.75rem', padding: '1rem 2.5rem', borderRadius: '1rem' }}
+                  className="btn btn-primary mobile-full"
+                  style={{ gap: '0.75rem', padding: '0.75rem 2rem', borderRadius: '1rem' }}
                 >
-                  <Printer style={{ width: '1.25rem', height: '1.25rem' }} />
+                  <Printer style={{ width: '1.15rem', height: '1.15rem' }} />
                   Cetak Slip Gaji
                 </button>
               </div>

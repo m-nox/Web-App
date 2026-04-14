@@ -60,77 +60,101 @@ export default function EmployeeLayout({ children }) {
   return (
     <>
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1023px) {
           .employee-sidebar {
             transform: translateX(-100%);
-            transition: transform 0.3s ease;
+            left: 0;
+            z-index: 100;
           }
           .employee-sidebar.open {
             transform: translateX(0);
           }
           .employee-main {
             margin-left: 0 !important;
+            padding-top: 60px !important;
           }
-          .sidebar-overlay {
-            display: block !important;
-          }
-          .mobile-topbar {
+          .mobile-header {
             display: flex !important;
           }
-          .employee-main-content {
-            padding: 1rem !important;
-          }
         }
-        @media (min-width: 769px) {
+        @media (min-width: 1024px) {
           .employee-sidebar {
             transform: translateX(0) !important;
           }
-          .mobile-topbar {
+          .mobile-header {
+            display: none !important;
+          }
+          .sidebar-overlay {
             display: none !important;
           }
         }
       `}</style>
 
-      <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-dark)', fontFamily: 'sans-serif' }}>
+      <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}>
 
-        {/* Mobile Overlay */}
+        {/* Mobile Backdrop */}
         {menuOpen && (
           <div
             className="sidebar-overlay"
             onClick={() => setMenuOpen(false)}
             style={{
-              display: 'none',
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              backgroundColor: 'rgba(0,0,0,0.5)',
-              zIndex: 40
+              backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 90,
+              backdropFilter: 'blur(2px)'
             }}
           />
         )}
 
+        {/* Mobile Header */}
+        <header className="mobile-header" style={{
+          display: 'none',
+          position: 'fixed', top: 0, left: 0, right: 0,
+          height: '60px',
+          backgroundColor: 'var(--bg-card)',
+          borderBottom: '1px solid var(--border-color)',
+          zIndex: 80,
+          padding: '0 1.25rem',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <h2 style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '1.15rem', margin: 0 }}>Lini HRIS</h2>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
+          >
+            <div style={{ width: '24px', height: '2px', backgroundColor: 'var(--text-dark)', marginBottom: '5px', borderRadius: '2px' }}></div>
+            <div style={{ width: '24px', height: '2px', backgroundColor: 'var(--text-dark)', marginBottom: '5px', borderRadius: '2px' }}></div>
+            <div style={{ width: '24px', height: '2px', backgroundColor: 'var(--text-dark)', borderRadius: '2px' }}></div>
+          </button>
+        </header>
+
         {/* Sidebar */}
         <aside
-          className={`employee-sidebar${menuOpen ? ' open' : ''}`}
+          className={`employee-sidebar ${menuOpen ? 'open' : ''}`}
           style={{
-            width: '260px',
+            width: '240px',
             backgroundColor: 'var(--bg-card)',
             borderRight: '1px solid var(--border-color)',
             display: 'flex',
             flexDirection: 'column',
             position: 'fixed',
             height: '100vh',
-            zIndex: 50,
-            transition: 'transform 0.3s ease'
+            zIndex: 100,
+            boxShadow: 'var(--shadow-sm)',
+            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
           {/* Brand */}
-          <div style={{ padding: '2rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0, color: 'var(--primary)' }}>
-              Lini HRIS
-            </h1>
+          <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '1.25rem', margin: 0 }}>Lini HRIS</h2>
+              <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Employee Self Service</p>
+            </div>
+            <button className="mobile-header" onClick={() => setMenuOpen(false)} style={{ display: 'none', background: 'none', border: 'none', fontSize: '1.5rem', color: 'var(--text-muted)' }}>&times;</button>
           </div>
 
           {/* Navigation */}
-          <nav style={{ flex: 1, padding: '0 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <nav style={{ flex: 1, padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.25rem', overflowY: 'auto' }}>
             {navItems.map((item) => {
               const isActive = pathname === item.path
               return (
@@ -138,14 +162,15 @@ export default function EmployeeLayout({ children }) {
                   key={item.name}
                   href={item.path}
                   style={{
-                    padding: '0.875rem 1rem',
+                    padding: '0.6rem 0.875rem',
                     borderRadius: 'var(--radius-md)',
                     textDecoration: 'none',
-                    fontWeight: isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? '600' : '500',
                     backgroundColor: isActive ? 'var(--primary-light)' : 'transparent',
                     color: isActive ? 'var(--primary)' : 'var(--text-muted)',
                     display: 'block',
-                    fontSize: '0.9rem'
+                    fontSize: '0.875rem',
+                    transition: 'var(--transition)'
                   }}
                 >
                   {item.name}
@@ -155,15 +180,15 @@ export default function EmployeeLayout({ children }) {
           </nav>
 
           {/* Bottom Actions */}
-          <div style={{ padding: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '0.75rem', borderTop: '1px solid var(--border-color)' }}>
             {profile && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
+              <div style={{ marginBottom: '0.75rem', padding: '0.5rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0, fontSize: '0.75rem' }}>
                   {profile.nama_depan[0]}{profile.nama_belakang?.[0] || ''}
                 </div>
                 <div style={{ overflow: 'hidden' }}>
-                  <p style={{ margin: 0, fontSize: '0.875rem', fontWeight: 'bold', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{profile.nama_depan}</p>
-                  <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>{profile.jabatan?.nama_jabatan || 'Karyawan'}</p>
+                  <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{profile.nama_depan}</p>
+                  <p style={{ margin: 0, fontSize: '0.65rem', color: 'var(--text-muted)' }}>{profile.jabatan?.nama_jabatan || 'Karyawan'}</p>
                 </div>
               </div>
             )}
@@ -171,13 +196,15 @@ export default function EmployeeLayout({ children }) {
               onClick={handleLogout}
               style={{
                 width: '100%',
-                padding: '0.75rem',
+                padding: '0.6rem',
                 backgroundColor: 'transparent',
                 border: '1px solid var(--danger)',
                 color: 'var(--danger)',
                 borderRadius: 'var(--radius-md)',
                 cursor: 'pointer',
-                fontWeight: 'bold'
+                fontWeight: '500',
+                fontSize: '0.8rem',
+                transition: 'var(--transition)'
               }}
             >
               Keluar
@@ -186,42 +213,13 @@ export default function EmployeeLayout({ children }) {
         </aside>
 
         {/* Main Content Area */}
-        <div className="employee-main" style={{ flex: 1, marginLeft: '260px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-
-          {/* Mobile Top Bar */}
-          <header
-            className="mobile-topbar"
-            style={{
-              display: 'none',
-              position: 'sticky', top: 0,
-              zIndex: 30,
-              backgroundColor: 'var(--bg-card)',
-              borderBottom: '1px solid var(--border-color)',
-              padding: '1rem 1.25rem',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}
-          >
-            <span style={{ fontWeight: 'bold', color: 'var(--primary)', fontSize: '1.1rem' }}>Lini HRIS</span>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                padding: '0.25rem', display: 'flex', flexDirection: 'column', gap: '5px'
-              }}
-              aria-label="Toggle menu"
-            >
-              <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: menuOpen ? 'var(--primary)' : 'var(--text-dark)', transition: 'all 0.3s', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-              <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: 'var(--text-dark)', opacity: menuOpen ? 0 : 1, transition: 'all 0.3s' }} />
-              <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: menuOpen ? 'var(--primary)' : 'var(--text-dark)', transition: 'all 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
-            </button>
-          </header>
-
-          <main className="employee-main-content" style={{ padding: '2rem', flex: 1 }}>
+        <div className="employee-main" style={{ flex: 1, marginLeft: '240px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          <main style={{ padding: 'var(--page-padding)', flex: 1, transition: 'padding 0.3s ease' }}>
             {children}
           </main>
         </div>
       </div>
     </>
+
   )
 }

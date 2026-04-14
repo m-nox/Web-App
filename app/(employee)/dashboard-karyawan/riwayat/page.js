@@ -63,24 +63,25 @@ export default function EmployeeRiwayatPage() {
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.25rem', background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+      <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="mobile-full">
+          <h1 style={{ fontWeight: '800', margin: 0, background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '1.5rem' }}>
             Riwayat Presensi
           </h1>
-          <p style={{ color: 'var(--text-muted)' }}>Log kehadiran bulanan Anda.</p>
+          <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.85rem' }}>Log kehadiran bulanan Anda.</p>
         </div>
         <select
           value={filterMonth}
           onChange={(e) => setFilterMonth(e.target.value)}
+          className="mobile-full"
           style={{
-            padding: '0.625rem 1rem',
+            padding: '0.5rem 0.75rem',
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--border-color)',
             backgroundColor: 'var(--bg-card)',
             color: 'var(--text-dark)',
-            fontWeight: '500',
-            fontSize: '0.9rem',
+            fontWeight: '700',
+            fontSize: '0.8rem',
             cursor: 'pointer',
             outline: 'none'
           }}
@@ -92,27 +93,27 @@ export default function EmployeeRiwayatPage() {
       </div>
 
       {/* Month Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
-        <div className="card" style={{ borderLeft: '4px solid var(--success)', padding: '1.25rem 1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500', marginBottom: '0.5rem' }}>Tepat Waktu</p>
-          <p style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--success)', margin: 0 }}>{totalOnTime}</p>
+      <div className="grid-stack" style={{ gap: '0.75rem', marginBottom: '1.25rem' }}>
+        <div className="card" style={{ borderLeft: '4px solid var(--success)', padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', marginBottom: '0.25rem', textTransform: 'uppercase' }}>On Time</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--success)', margin: 0 }}>{totalOnTime}</p>
         </div>
-        <div className="card" style={{ borderLeft: '4px solid var(--danger)', padding: '1.25rem 1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500', marginBottom: '0.5rem' }}>Terlambat</p>
-          <p style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--danger)', margin: 0 }}>{totalTerlambat}</p>
+        <div className="card" style={{ borderLeft: '4px solid var(--danger)', padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Late</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--danger)', margin: 0 }}>{totalTerlambat}</p>
         </div>
-        <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '1.25rem 1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500', marginBottom: '0.5rem' }}>Total Kehadiran</p>
-          <p style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--primary)', margin: 0 }}>{totalHadir}</p>
+        <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Total</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--primary)', margin: 0 }}>{totalHadir}</p>
         </div>
       </div>
 
       {/* History Table */}
-      <div className="card glass" style={{ padding: '2rem' }}>
-        <h3 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '1.25rem', color: 'var(--text-muted)' }}>
-          Menampilkan {filteredHistory.length} data untuk {formatMonthLabel(filterMonth)}
+      <div className="card glass" style={{ padding: 0 }}>
+        <h3 style={{ padding: '1rem', margin: 0, fontSize: '0.8rem', fontWeight: '800', color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)' }}>
+          Log {formatMonthLabel(filterMonth)} ({filteredHistory.length})
         </h3>
-        <div style={{ overflowX: 'auto' }}>
+        <div className="responsive-table">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)' }}>

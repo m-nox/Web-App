@@ -71,11 +71,11 @@ export default function AdminCutiPage() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '0.2rem', color: 'var(--text-dark)' }}>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <h1 style={{ fontWeight: '800', marginBottom: '0.15rem', color: 'var(--text-dark)' }}>
           Manajemen Cuti
         </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>Review dan kelola pengajuan izin/cuti karyawan.</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0 }}>Review dan kelola pengajuan izin/cuti karyawan.</p>
       </div>
 
       {/* Pending Section */}
@@ -88,41 +88,41 @@ export default function AdminCutiPage() {
             🎉 Tidak ada pengajuan tertunda.
           </p>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+          <div className="grid-stack" style={{ gap: '1rem' }}>
             {pendingRequests.map((req) => (
-              <div key={req.id} className="card" style={{ padding: '1.5rem', border: '1px solid var(--border-color)', backgroundColor: 'white' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{req.karyawan?.nama_depan} {req.karyawan?.nama_belakang}</h4>
-                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>{req.karyawan?.email}</p>
+              <div key={req.id} className="card" style={{ padding: '1rem', border: '1px solid var(--border-color)', backgroundColor: 'white', marginBottom: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '1rem' }}>
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: '800' }}>{req.karyawan?.nama_depan} {req.karyawan?.nama_belakang}</h4>
+                    <p style={{ margin: 0, fontSize: '0.7rem', color: 'var(--text-muted)' }}>{req.karyawan?.email}</p>
                   </div>
-                  <span style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem', height: 'fit-content', borderRadius: '4px', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', fontWeight: '600' }}>
+                  <span style={{ fontSize: '0.65rem', padding: '0.15rem 0.5rem', height: 'fit-content', borderRadius: '4px', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', fontWeight: '800', textTransform: 'uppercase' }}>
                     {req.jenis_cuti}
                   </span>
                 </div>
-                <div style={{ fontSize: '0.9rem', marginBottom: '1.25rem' }}>
-                  <p style={{ margin: '0 0 0.5rem 0' }}>📅 <strong>{req.tanggal_mulai}</strong> s/d <strong>{req.tanggal_selesai}</strong></p>
-                  <p style={{ margin: 0, color: '#4b5563', fontStyle: 'italic' }}>"{req.alasan || 'Tidak ada alasan'}"</p>
+                <div style={{ fontSize: '0.8rem', marginBottom: '1rem' }}>
+                  <p style={{ margin: '0 0 0.25rem 0' }}>📅 <strong>{req.tanggal_mulai}</strong> s/d <strong>{req.tanggal_selesai}</strong></p>
+                  <p style={{ margin: 0, color: 'var(--text-muted)', fontStyle: 'italic' }}>"{req.alasan || 'Tidak ada alasan'}"</p>
                 </div>
-                <div style={{ marginTop: '1rem' }}>
+                <div style={{ marginTop: '0.75rem' }}>
                   <textarea
-                    placeholder="Tambah catatan admin (opsional)..."
+                    placeholder="Catatan..."
                     value={updating === req.id ? catatan : ''}
                     onChange={(e) => setCatatan(e.target.value)}
-                    style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', fontSize: '0.8rem', marginBottom: '0.75rem', outline: 'none' }}
+                    style={{ width: '100%', padding: '0.4rem 0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', fontSize: '0.75rem', marginBottom: '0.5rem', outline: 'none' }}
                   />
-                  <div style={{ display: 'flex', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <button
                       disabled={updating === req.id}
                       onClick={() => { setCatatan(''); handleUpdate(req.id, 'Ditolak') }}
-                      style={{ flex: 1, padding: '0.625rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--danger)', color: 'var(--danger)', fontWeight: '600', backgroundColor: 'transparent', cursor: 'pointer' }}
+                      style={{ flex: 1, padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--danger)', color: 'var(--danger)', fontWeight: '800', fontSize: '0.8rem', backgroundColor: 'transparent', cursor: 'pointer' }}
                     >
                       {updating === req.id ? '...' : 'Tolak'}
                     </button>
                     <button
                       disabled={updating === req.id}
                       onClick={() => handleUpdate(req.id, 'Disetujui')}
-                      style={{ flex: 1, padding: '0.625rem', borderRadius: 'var(--radius-md)', border: 'none', backgroundColor: 'var(--success)', color: 'white', fontWeight: '600', cursor: 'pointer' }}
+                      style={{ flex: 1, padding: '0.5rem', borderRadius: 'var(--radius-md)', border: 'none', backgroundColor: 'var(--success)', color: 'white', fontWeight: '800', fontSize: '0.8rem', cursor: 'pointer' }}
                     >
                       {updating === req.id ? '...' : 'Setujui'}
                     </button>
@@ -134,10 +134,9 @@ export default function AdminCutiPage() {
         )}
       </div>
 
-      {/* History Table */}
-      <div className="card glass" style={{ padding: '1.25rem' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1rem' }}>Riwayat Keputusan</h3>
-        <div style={{ overflowX: 'auto' }}>
+      <div className="card glass" style={{ padding: 0 }}>
+        <h3 style={{ padding: '1rem', margin: 0, fontSize: '0.85rem', fontWeight: '800' }}>Riwayat Keputusan</h3>
+        <div className="responsive-table">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--border-color)' }}>

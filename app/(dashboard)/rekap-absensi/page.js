@@ -51,21 +51,21 @@ export default function RecapPage() {
 
   return (
     <main>
-      <header style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '800', color: 'var(--text-dark)' }}>Rekap Absensi Karyawan</h1>
-        <p style={{ color: 'var(--text-muted)' }}>Laporan ringkasan kehadiran seluruh staf secara periodik.</p>
+      <header style={{ marginBottom: '1.5rem' }}>
+        <h1 style={{ fontWeight: '800', color: 'var(--text-dark)' }}>Rekap Absensi Karyawan</h1>
+        <p style={{ color: 'var(--text-muted)', margin: 0 }}>Laporan ringkasan kehadiran seluruh staf secara periodik.</p>
       </header>
 
       {/* Filters */}
-      <div className="card glass" style={{ marginBottom: '2rem', padding: '1.5rem' }}>
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', flexWrap: 'wrap' }}>
-          <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Tipe Laporan</label>
+      <div className="card glass" style={{ marginBottom: '1.25rem', padding: '1rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+          <div className="mobile-full" style={{ flex: '1 1 150px' }}>
+            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', marginBottom: '0.25rem' }}>Tipe Laporan</label>
             <select 
               value={filterType} 
               onChange={(e) => setFilterType(e.target.value)}
               className="glass"
-              style={{ padding: '0.6rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none' }}
+              style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none' }}
             >
               <option value="day">Harian</option>
               <option value="month">Bulanan</option>
@@ -74,24 +74,24 @@ export default function RecapPage() {
           </div>
 
           {filterType === 'day' && (
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Pilih Tanggal</label>
+            <div className="mobile-full" style={{ flex: '1 1 150px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', marginBottom: '0.25rem' }}>Pilih Tanggal</label>
               <input 
                 type="date"
                 value={filters.date}
                 onChange={(e) => setFilters({...filters, date: e.target.value})}
-                style={{ padding: '0.6rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
+                style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
               />
             </div>
           )}
 
           {filterType === 'month' && (
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Pilih Bulan</label>
+            <div className="mobile-full" style={{ flex: '1 1 150px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', marginBottom: '0.25rem' }}>Pilih Bulan</label>
               <select 
                 value={filters.month}
                 onChange={(e) => setFilters({...filters, month: e.target.value})}
-                style={{ padding: '0.6rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
+                style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
               >
                 {months.map(m => <option key={m.v} value={m.v}>{m.n}</option>)}
               </select>
@@ -99,26 +99,27 @@ export default function RecapPage() {
           )}
 
           {(filterType === 'month' || filterType === 'year') && (
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Pilih Tahun</label>
+            <div className="mobile-full" style={{ flex: '1 1 120px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', marginBottom: '0.25rem' }}>Pilih Tahun</label>
               <select 
                 value={filters.year}
                 onChange={(e) => setFilters({...filters, year: e.target.value})}
-                style={{ padding: '0.6rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
+                style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
               >
                 {years.map(y => <option key={y} value={y}>{y}</option>)}
               </select>
             </div>
           )}
 
-          <button className="btn btn-primary" onClick={fetchRecap} style={{ height: '42px' }}>
-            🔄 Refresh data
+          <button className="btn btn-primary mobile-full" onClick={fetchRecap} style={{ height: '38px', padding: '0 1rem' }}>
+            🔄 Refresh
           </button>
         </div>
       </div>
 
       {/* Recap Table */}
-      <div className="card glass" style={{ padding: 0, overflow: 'hidden' }}>
+      <div className="card glass" style={{ padding: 0 }}>
+        <div className="responsive-table">
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ backgroundColor: 'rgba(30, 144, 255, 0.05)', textAlign: 'left' }}>
@@ -169,6 +170,7 @@ export default function RecapPage() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
     </main>
   )

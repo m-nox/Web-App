@@ -122,7 +122,7 @@ export default function EmployeeDashboard() {
   }
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', padding: '0 0 2rem 0' }}>
       
       {/* Install App Banner - shown only if not installed yet and prompt is available */}
       {!isInstalled && installPrompt && (
@@ -133,47 +133,47 @@ export default function EmployeeDashboard() {
           display: 'flex',
           alignItems: 'center',
           gap: '1rem',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          padding: '1rem'
         }}>
-          <img src="/icon-192.png" alt="Icon" style={{ width: '52px', height: '52px', borderRadius: '12px', flexShrink: 0 }} />
+          <img src="/icon-192.png" alt="Icon" style={{ width: '48px', height: '48px', borderRadius: '12px', flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: '180px' }}>
-            <p style={{ margin: 0, fontWeight: 'bold', color: 'white', fontSize: '1rem' }}>Install Aplikasi Lini HRIS</p>
-            <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Tambahkan ke Home Screen untuk akses lebih cepat tanpa buka browser</p>
+            <p style={{ margin: 0, fontWeight: 'bold', color: 'white', fontSize: '0.95rem' }}>Install Aplikasi Lini HRIS</p>
+            <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', marginTop: '0.15rem' }}>Akses instan dari home screen Anda.</p>
           </div>
           <button
             onClick={handleInstall}
+            className="mobile-full"
             style={{
-              padding: '0.75rem 1.5rem',
+              padding: '0.6rem 1.25rem',
               backgroundColor: 'white',
               color: '#00AEEF',
               border: 'none',
               borderRadius: 'var(--radius-md)',
               cursor: 'pointer',
-              fontWeight: 'bold',
-              fontSize: '0.875rem',
-              flexShrink: 0
+              fontWeight: '800',
+              fontSize: '0.8rem'
             }}
           >
-            📲 Install Sekarang
+            📲 Install
           </button>
         </div>
       )}
 
       {/* Header Profile Section */}
       {profile && (
-        <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>
+        <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', padding: '1rem' }}>
+          <div style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', fontWeight: 'bold', flexShrink: 0 }}>
              {profile.nama_depan[0]}{profile.nama_belakang?.[0] || ''}
           </div>
-          <div>
-             <h1 style={{ margin: '0 0 0.25rem 0', fontSize: '1.5rem', color: 'var(--text-dark)' }}>{profile.nama_depan} {profile.nama_belakang || ''}</h1>
-             <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>{profile.jabatan?.nama_jabatan || 'Team Member'} • {profile.departemen?.nama_departemen || '-'}</p>
+          <div style={{ flex: 1, minWidth: '200px' }}>
+             <h1 style={{ margin: '0 0 0.15rem 0', fontWeight: '800', color: 'var(--text-dark)' }}>{profile.nama_depan} {profile.nama_belakang || ''}</h1>
+             <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '600' }}>{profile.jabatan?.nama_jabatan || 'Team Member'} • {profile.departemen?.nama_departemen || '-'}</p>
              {(profile.nama_bank || profile.nomor_rekening) && (
-               <p style={{ margin: '0.5rem 0 0 0', color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 'bold', display: 'flex', gap: '0.5rem' }}>
-                 <span>🏦 {profile.nama_bank || 'Bank Belum Diatur'}</span>
-                 <span>•</span>
-                 <span>💳 {profile.nomor_rekening || '-'}</span>
-               </p>
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--primary)', fontWeight: '700', backgroundColor: 'var(--primary-light)', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>🏦 {profile.nama_bank || '-'}</span>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: '700', backgroundColor: 'var(--secondary)', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>💳 {profile.nomor_rekening || '-'}</span>
+                </div>
              )}
           </div>
         </div>
@@ -182,78 +182,76 @@ export default function EmployeeDashboard() {
       <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
         
         {/* Left Col: Live Clock & Actions */}
-        <div style={{ flex: '1 1 300px', ...cardStyle, textAlign: 'center' }}>
+        <div style={{ flex: '1 1 300px', ...cardStyle, textAlign: 'center', padding: '1rem' }}>
           <div style={{ 
             display: 'inline-block',
-            padding: '0.25rem 1rem', 
+            padding: '0.25rem 0.75rem', 
             borderRadius: '99px',
-            fontSize: '0.75rem',
-            fontWeight: 'bold',
+            fontSize: '0.65rem',
+            fontWeight: '800',
             backgroundColor: isAtOffice ? 'rgba(16, 185, 129, 0.1)' : 'rgba(244, 63, 94, 0.1)',
             color: isAtOffice ? 'var(--success)' : 'var(--danger)',
-            marginBottom: '1.5rem'
+            marginBottom: '1rem',
+            textTransform: 'uppercase'
           }}>
-            {isAtOffice ? 'Di Dalam Jaringan Kantor' : 'Di Luar Jaringan Kantor'}
+            {isAtOffice ? '📍 Kantor' : '🏠 Luar Kantor'}
           </div>
           
-          {/* Permanent Network Monitoring Info */}
           <div style={{ 
-            fontSize: '0.7rem', 
+            fontSize: '0.65rem', 
             color: 'var(--text-muted)', 
-            marginTop: '-1rem', 
-            marginBottom: '1.5rem', 
+            marginBottom: '1rem', 
             display: 'flex', 
-            flexDirection: 'column', 
-            gap: '0.2rem',
+            justifyContent: 'center',
+            gap: '0.5rem',
             opacity: 0.8 
           }}>
-            <span>IP Anda: <strong style={{ color: 'var(--text-dark)' }}>{attendance?.clientIp || 'Mendeteksi...'}</strong></span>
-            <span>IP Kantor: <strong style={{ color: 'var(--text-dark)' }}>{attendance?.officeIp || 'Mendeteksi...'}</strong></span>
+            <span>IP: <strong>{attendance?.clientIp?.slice(0, 15)}...</strong></span>
           </div>
               
-          <h2 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0 0 0.5rem 0', color: 'var(--text-dark)' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '900', margin: '0 0 0.25rem 0', color: 'var(--text-dark)' }}>
             {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </h2>
-          <p style={{ color: 'var(--text-muted)', margin: '0 0 2rem 0' }}>
-            {time.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+          <p style={{ color: 'var(--text-muted)', margin: '0 0 1.5rem 0', fontSize: '0.8rem' }}>
+            {time.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem' }}>
             <div>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>MASUK</p>
-              <p style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold' }}>{todayAtt?.jam_masuk || '--:--'}</p>
+              <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '800' }}>MASUK</p>
+              <p style={{ margin: 0, fontSize: '1rem', fontWeight: '800' }}>{todayAtt?.jam_masuk || '--:--'}</p>
             </div>
             <div>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 'bold' }}>KELUAR</p>
-              <p style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold' }}>{todayAtt?.jam_keluar || '--:--'}</p>
+              <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '800' }}>KELUAR</p>
+              <p style={{ margin: 0, fontSize: '1rem', fontWeight: '800' }}>{todayAtt?.jam_keluar || '--:--'}</p>
             </div>
           </div>
 
           <div>
             {alreadyDone ? (
-              <div style={{ padding: '1rem', backgroundColor: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', borderRadius: 'var(--radius-md)', fontWeight: 'bold' }}>
+              <div style={{ padding: '0.75rem', backgroundColor: 'var(--success-light)', color: 'var(--success)', borderRadius: 'var(--radius-md)', fontWeight: '800', fontSize: '0.85rem' }}>
                 Presensi Selesai
               </div>
             ) : (
               <>
                 <button
                   onClick={handleClock}
+                  className="mobile-full"
                   disabled={!isAtOffice || processLoading || clockOutDisabled}
                   style={{
-                    width: '100%',
-                    padding: '1rem',
+                    padding: '0.85rem',
                     borderRadius: 'var(--radius-md)',
                     border: 'none',
                     backgroundColor: (!isAtOffice || clockOutDisabled) ? 'var(--border-color)' : (canClockIn ? 'var(--primary)' : 'var(--danger)'),
                     color: (!isAtOffice || clockOutDisabled) ? 'var(--text-muted)' : 'white',
-                    fontWeight: 'bold',
+                    fontWeight: '800',
                     cursor: (!isAtOffice || clockOutDisabled) ? 'not-allowed' : 'pointer'
                   }}
                 >
-                  {processLoading ? 'Memproses...' : (canClockIn ? 'Presensi Masuk' : 'Presensi Pulang')}
+                  {processLoading ? '...' : (canClockIn ? 'Presensi Masuk' : 'Presensi Pulang')}
                 </button>
-                {clockOutDisabled && <p style={{ fontSize: '0.75rem', color: 'var(--warning)', marginTop: '0.5rem' }}>Anda baru bisa pulang pukul 17:03.</p>}
-                {!isAtOffice && !alreadyDone && <p style={{ fontSize: '0.75rem', color: 'var(--danger)', marginTop: '0.5rem' }}>Harus terhubung dengan WIFI Kantor.</p>}
+                {clockOutDisabled && <p style={{ fontSize: '0.65rem', color: 'var(--warning)', marginTop: '0.5rem' }}>Pulang pukul 17:03.</p>}
+                {!isAtOffice && !alreadyDone && <p style={{ fontSize: '0.65rem', color: 'var(--danger)', marginTop: '0.5rem' }}>Gunakan WIFI Kantor.</p>}
               </>
             )}
           </div>
@@ -262,27 +260,28 @@ export default function EmployeeDashboard() {
         {/* Right Col: Stats & History */}
         <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center' }}>
-               <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.25rem 0', color: 'var(--text-dark)' }}>{totalOnTime}</h3>
-               <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--success)', fontWeight: 'bold' }}>TEPAT WAKTU</p>
+          <div className="grid-stack" style={{ gap: '0.75rem' }}>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.75rem' }}>
+               <h3 style={{ margin: '0 0 0.15rem 0', fontWeight: '900' }}>{totalOnTime}</h3>
+               <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--success)', fontWeight: '800' }}>ON TIME</p>
             </div>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center' }}>
-               <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.25rem 0', color: 'var(--text-dark)' }}>{totalTerlambat}</h3>
-               <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--danger)', fontWeight: 'bold' }}>TERLAMBAT</p>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.75rem' }}>
+               <h3 style={{ margin: '0 0 0.15rem 0', fontWeight: '900' }}>{totalTerlambat}</h3>
+               <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--danger)', fontWeight: '800' }}>LATE</p>
             </div>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center' }}>
-               <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.25rem 0', color: 'var(--text-dark)' }}>{totalHadir}</h3>
-               <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 'bold' }}>KEHADIRAN</p>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.75rem' }}>
+               <h3 style={{ margin: '0 0 0.15rem 0', fontWeight: '900' }}>{totalHadir}</h3>
+               <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--primary)', fontWeight: '800' }}>ATTEND</p>
             </div>
           </div>
 
-          <div style={{ ...cardStyle, flex: 1, marginBottom: 0, overflow: 'auto' }}>
-            <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem' }}>Riwayat Presensi</h3>
+          <div style={{ ...cardStyle, flex: 1, marginBottom: 0, padding: '1rem' }}>
+            <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.95rem', fontWeight: '800' }}>Riwayat</h3>
+            <div className="responsive-table">
             {history.length === 0 ? (
                <p style={{ color: 'var(--text-muted)' }}>Belum ada data history.</p>
             ) : (
-               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
                   <thead>
                      <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
                         <th style={{ padding: '0.5rem 0' }}>Tanggal</th>
@@ -301,12 +300,14 @@ export default function EmployeeDashboard() {
                            </td>
                            <td style={{ padding: '0.75rem 0', textAlign: 'right' }}>
                               <span style={{ 
-                                 padding: '0.25rem 0.5rem', 
+                                 padding: '0.2rem 0.4rem', 
                                  borderRadius: '4px', 
+                                 fontSize: '0.7rem',
+                                 fontWeight: '800',
                                  backgroundColor: h.status === 'Hadir' ? (h.terlambat ? 'rgba(244, 63, 94, 0.1)' : 'rgba(16, 185, 129, 0.1)') : 'rgba(100, 116, 139, 0.1)',
                                  color: h.status === 'Hadir' ? (h.terlambat ? 'var(--danger)' : 'var(--success)') : 'var(--text-muted)'
                               }}>
-                                 {h.status === 'Hadir' ? (h.terlambat ? 'Terlambat' : 'Tepat Waktu') : h.status}
+                                 {h.status === 'Hadir' ? (h.terlambat ? 'LAT' : 'OK') : h.status}
                               </span>
                            </td>
                         </tr>
@@ -314,6 +315,7 @@ export default function EmployeeDashboard() {
                   </tbody>
                </table>
             )}
+            </div>
           </div>
 
         </div>

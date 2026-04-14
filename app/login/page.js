@@ -82,15 +82,15 @@ export default function LoginPage() {
           zIndex: 50,
           animation: 'fadeIn 0.3s ease-out forwards'
         }}>
-          <div className="card glass" style={{ textAlign: 'center', padding: '3rem', transform: 'translateY(-20px)', animation: 'slideDown 0.4s ease-out forwards' }}>
+          <div className="card glass" style={{ textAlign: 'center', padding: 'var(--page-padding)', maxWidth: '90%', animation: 'slideDown 0.4s ease-out forwards' }}>
             <div style={{
-              width: '60px', height: '60px', borderRadius: '50%', background: 'var(--success)', color: 'white',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 1.5rem'
+              width: '50px', height: '50px', borderRadius: '50%', background: 'var(--success)', color: 'white',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto 1.25rem'
             }}>
               ✓
             </div>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-dark)' }}>Login Berhasil!</h2>
-            <p style={{ color: 'var(--text-muted)' }}>Mempersiapkan dasboard HRIS Anda...</p>
+            <h2 style={{ marginBottom: '0.25rem', color: 'var(--text-dark)' }}>Login Berhasil!</h2>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Mempersiapkan dasboard HRIS Anda...</p>
           </div>
 
           <style dangerouslySetInnerHTML={{
@@ -101,10 +101,10 @@ export default function LoginPage() {
         </div>
       )}
 
-      <div className="card glass" style={{ width: '100%', maxWidth: '400px', padding: '2.5rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '0.5rem' }}>HRIS Web</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Sign in to manage your workspace</p>
+      <div className="card glass mobile-full" style={{ width: '100%', maxWidth: '400px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+          <h1 style={{ color: 'var(--primary)', marginBottom: '0.25rem' }}>HRIS Web</h1>
+          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Sign in to manage your workspace</p>
         </div>
 
         {error && (

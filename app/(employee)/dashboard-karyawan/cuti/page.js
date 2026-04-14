@@ -78,44 +78,44 @@ export default function EmployeeCutiPage() {
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.25rem', background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+      <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="mobile-full">
+          <h1 style={{ fontWeight: '800', margin: 0, background: 'linear-gradient(45deg, var(--primary), #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '1.5rem' }}>
             Pengajuan Cuti
           </h1>
-          <p style={{ color: 'var(--text-muted)' }}>Kelola izin dan cuti kerja Anda.</p>
+          <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.85rem' }}>Kelola izin dan cuti kerja Anda.</p>
         </div>
-        <button className="btn btn-primary" onClick={() => setShowModal(true)} style={{ padding: '0.75rem 1.5rem', fontWeight: '600' }}>
-          + Ajukan Cuti Baru
+        <button className="btn btn-primary mobile-full" onClick={() => setShowModal(true)} style={{ padding: '0.6rem 1rem', fontWeight: '800', fontSize: '0.8rem' }}>
+          + Pengajuan Baru
         </button>
       </div>
 
       {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-        <div className="card glass" style={{ padding: '1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Berjalan</p>
-          <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--warning)', margin: 0 }}>
+      <div className="grid-stack" style={{ gap: '0.75rem', marginBottom: '1.25rem' }}>
+        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Pending</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--warning)', margin: 0 }}>
             {history.filter(h => h.status === 'Pending').length}
           </p>
         </div>
-        <div className="card glass" style={{ padding: '1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Disetujui</p>
-          <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--success)', margin: 0 }}>
+        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Approve</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--success)', margin: 0 }}>
             {history.filter(h => h.status === 'Disetujui').length}
           </p>
         </div>
-        <div className="card glass" style={{ padding: '1.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Total Pengajuan</p>
-          <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--primary)', margin: 0 }}>
+        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Total</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--primary)', margin: 0 }}>
             {history.length}
           </p>
         </div>
       </div>
 
       {/* History Table */}
-      <div className="card glass" style={{ padding: '1.5rem' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem' }}>Riwayat Pengajuan</h3>
-        <div style={{ overflowX: 'auto' }}>
+      <div className="card glass" style={{ padding: 0 }}>
+        <h3 style={{ padding: '1rem', margin: 0, fontSize: '0.85rem', fontWeight: '800', borderBottom: '1px solid var(--border-color)' }}>Log Pengajuan</h3>
+        <div className="responsive-table">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
@@ -183,25 +183,25 @@ export default function EmployeeCutiPage() {
                   <option>Cuti Melahirkan</option>
                 </select>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '500' }}>Tanggal Mulai</label>
+              <div className="grid-stack" style={{ gap: '1rem' }}>
+                <div className="mobile-full">
+                  <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '700' }}>Tgl. Mulai</label>
                   <input
                     type="date"
                     required
                     value={formData.tanggal_mulai}
                     onChange={(e) => setFormData({...formData, tanggal_mulai: e.target.value})}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none' }}
+                    style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }}
                   />
                 </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '500' }}>Tanggal Selesai</label>
+                <div className="mobile-full">
+                  <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '700' }}>Tgl. Selesai</label>
                   <input
                     type="date"
                     required
                     value={formData.tanggal_selesai}
                     onChange={(e) => setFormData({...formData, tanggal_selesai: e.target.value})}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none' }}
+                    style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }}
                   />
                 </div>
               </div>
