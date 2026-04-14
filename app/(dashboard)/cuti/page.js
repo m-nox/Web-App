@@ -71,16 +71,16 @@ export default function AdminCutiPage() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.25rem', color: 'var(--text-dark)' }}>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h1 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '0.2rem', color: 'var(--text-dark)' }}>
           Manajemen Cuti
         </h1>
-        <p style={{ color: 'var(--text-muted)' }}>Review dan kelola pengajuan izin/cuti karyawan.</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>Review dan kelola pengajuan izin/cuti karyawan.</p>
       </div>
 
       {/* Pending Section */}
-      <div className="card glass" style={{ padding: '2rem', marginBottom: '2rem', borderTop: '4px solid var(--warning)' }}>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div className="card glass" style={{ padding: '1.25rem', marginBottom: '1.5rem', borderTop: '4px solid var(--warning)' }}>
+        <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           ⏳ Menunggu Persetujuan ({pendingRequests.length})
         </h3>
         {pendingRequests.length === 0 ? (
@@ -135,17 +135,17 @@ export default function AdminCutiPage() {
       </div>
 
       {/* History Table */}
-      <div className="card glass" style={{ padding: '2rem' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem' }}>Riwayat Keputusan</h3>
+      <div className="card glass" style={{ padding: '1.25rem' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1rem' }}>Riwayat Keputusan</h3>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
             <thead>
-              <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
-                <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Karyawan</th>
-                <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Jenis Cuti</th>
-                <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Periode</th>
-                <th style={{ padding: '1rem', color: 'var(--text-muted)', textAlign: 'center' }}>Status</th>
-                <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Catatan Admin</th>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ padding: '0.75rem', color: 'var(--text-muted)' }}>Karyawan</th>
+                <th style={{ padding: '0.75rem', color: 'var(--text-muted)' }}>Jenis Cuti</th>
+                <th style={{ padding: '0.75rem', color: 'var(--text-muted)' }}>Periode</th>
+                <th style={{ padding: '0.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>Status</th>
+                <th style={{ padding: '0.75rem', color: 'var(--text-muted)' }}>Catatan Admin</th>
               </tr>
             </thead>
             <tbody>
@@ -156,12 +156,12 @@ export default function AdminCutiPage() {
               ) : (
                 historyRequests.map((req) => (
                   <tr key={req.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '0.75rem' }}>
                       <p style={{ margin: 0, fontWeight: '600' }}>{req.karyawan?.nama_depan} {req.karyawan?.nama_belakang}</p>
                     </td>
-                    <td style={{ padding: '1rem' }}>{req.jenis_cuti}</td>
-                    <td style={{ padding: '1rem' }}>{req.tanggal_mulai} s/d {req.tanggal_selesai}</td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }}>
+                    <td style={{ padding: '0.75rem' }}>{req.jenis_cuti}</td>
+                    <td style={{ padding: '0.75rem' }}>{req.tanggal_mulai} s/d {req.tanggal_selesai}</td>
+                    <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                       <span style={{
                         padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', fontSize: '0.7rem', fontWeight: '800',
                         backgroundColor: req.status === 'Disetujui' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
@@ -170,7 +170,7 @@ export default function AdminCutiPage() {
                         {req.status}
                       </span>
                     </td>
-                    <td style={{ padding: '1rem', fontSize: '0.8rem', color: '#6b7280' }}>
+                    <td style={{ padding: '0.75rem', fontSize: '0.8rem', color: '#6b7280' }}>
                       {req.catatan_admin || '-'}
                     </td>
                   </tr>

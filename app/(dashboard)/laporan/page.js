@@ -76,43 +76,43 @@ export default function LaporanPage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingBottom: '5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', paddingBottom: '3rem' }}>
       {/* Header Section */}
       <div style={{ 
         position: 'relative', 
         backgroundColor: '#111827', 
-        borderRadius: '2rem', 
-        padding: '3rem', 
+        borderRadius: '1.25rem', 
+        padding: '1.5rem', 
         overflow: 'hidden', 
         boxShadow: 'var(--shadow-lg)',
         color: 'white'
       }}>
-        <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ 
               display: 'inline-flex', 
               alignItems: 'center', 
-              padding: '0.5rem 1rem', 
+              padding: '0.4rem 0.75rem', 
               backgroundColor: 'rgba(31, 41, 55, 0.5)', 
               border: '1px solid rgba(55, 65, 81, 0.5)', 
-              borderRadius: '1rem', 
-              fontSize: '0.875rem', 
+              borderRadius: '0.75rem', 
+              fontSize: '0.7rem', 
               fontWeight: '700',
               width: 'fit-content'
             }}>
-              <Zap style={{ height: '1rem', width: '1rem', marginRight: '0.5rem', color: '#818cf8' }} />
+              <Zap style={{ height: '0.875rem', width: '0.875rem', marginRight: '0.4rem', color: '#818cf8' }} />
               Live Reporting System
             </div>
-            <h1 style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '-0.05em', margin: 0, lineHeight: '1.1' }}>
-              Executive <br /> Dashboard
+            <h1 style={{ fontSize: '1.75rem', fontWeight: '900', letterSpacing: '-0.02em', margin: 0, lineHeight: '1.2' }}>
+              Executive Dashboard
             </h1>
-            <p style={{ color: '#9ca3af', fontSize: '1.125rem', maxWidth: '28rem', fontWeight: '500', margin: 0 }}>
-              Analisis mendalam mengenai kinerja operasional, kehadiran, dan anggaran keuangan perusahaan Anda.
+            <p style={{ color: '#9ca3af', fontSize: '0.9rem', maxWidth: '24rem', fontWeight: '500', margin: 0 }}>
+              Analisis operasional, kehadiran, dan anggaran keuangan perusahaan.
             </p>
           </div>
           
-          <button className="btn btn-primary" style={{ padding: '1.25rem 2rem', width: 'fit-content', fontSize: '1rem', borderRadius: '1.25rem' }}>
-            <Download style={{ marginRight: '0.75rem', height: '1.5rem', width: '1.5rem' }} />
+          <button className="btn btn-primary" style={{ padding: '0.75rem 1.25rem', width: 'fit-content', fontSize: '0.875rem', borderRadius: '0.75rem' }}>
+            <Download style={{ marginRight: '0.5rem', height: '1.15rem', width: '1.15rem' }} />
             Generate Summary
           </button>
         </div>
@@ -163,17 +163,17 @@ export default function LaporanPage() {
         />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
         {/* Main Chart Area */}
-        <div className="card" style={{ padding: '3rem', flex: 2 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '900', display: 'flex', alignItems: 'center', margin: 0 }}>
-              <Target style={{ marginRight: '1rem', color: 'var(--primary)', height: '2rem', width: '2rem' }} />
+        <div className="card" style={{ padding: '1.5rem', flex: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: '900', display: 'flex', alignItems: 'center', margin: 0 }}>
+              <Target style={{ marginRight: '0.75rem', color: 'var(--primary)', height: '1.25rem', width: '1.25rem' }} />
               KPI Operasional
             </h3>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
              <ModernMetric label="Tingkat Retensi Karyawan" value={94} color="var(--primary)" />
              <ModernMetric label="Efisiensi Kehadiran" value={Math.round((stats.presentToday / (stats.totalEmployees || 1)) * 100)} color="#10b981" />
              <ModernMetric label="Kepuasan Kerja (eNPS)" value={88} color="#f59e0b" />
@@ -183,19 +183,19 @@ export default function LaporanPage() {
         {/* System Health Area */}
         <div style={{ 
           backgroundColor: '#0f172a', 
-          borderRadius: '2rem', 
-          padding: '2.5rem', 
+          borderRadius: '1.25rem', 
+          padding: '1.5rem', 
           color: 'white', 
           display: 'flex', 
           flexDirection: 'column', 
           justifyContent: 'space-between',
-          gap: '2rem'
+          gap: '1.25rem'
         }}>
           <div>
-            <h3 style={{ fontSize: '0.75rem', fontWeight: '800', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2rem' }}>
+            <h3 style={{ fontSize: '0.7rem', fontWeight: '800', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
               Status Infrastruktur
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                <SystemItem label="Core Database" status="Healthy" active={true} />
                <SystemItem label="Bio-Sync Engine" status="Online" active={true} />
                <SystemItem label="Bank Gateway" status="Standby" active={false} />
@@ -204,12 +204,12 @@ export default function LaporanPage() {
           
           <div style={{ 
             backgroundColor: 'rgba(30, 64, 175, 0.2)', 
-            borderRadius: '1.5rem', 
-            padding: '2rem', 
+            borderRadius: '1rem', 
+            padding: '1rem', 
             border: '1px solid rgba(255, 255, 255, 0.1)'
           }}>
-            <p style={{ fontSize: '0.7rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', margin: '0 0 0.5rem 0' }}>Data Last Sync</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: '900', margin: 0 }}>{new Date().toLocaleTimeString()}</p>
+            <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#93c5fd', textTransform: 'uppercase', margin: '0 0 0.25rem 0' }}>Data Last Sync</p>
+            <p style={{ fontSize: '1.15rem', fontWeight: '900', margin: 0 }}>{new Date().toLocaleTimeString()}</p>
           </div>
         </div>
       </div>
@@ -219,12 +219,12 @@ export default function LaporanPage() {
 
 function StatCard({ icon, label, value, trend, color, bg, description, alert }) {
   return (
-    <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', overflow: 'hidden' }}>
-      {alert && <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', width: '0.75rem', height: '0.75rem', backgroundColor: '#f43f5e', borderRadius: '50%' }}></div>}
+    <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', overflow: 'hidden', padding: '1.25rem' }}>
+      {alert && <div style={{ position: 'absolute', top: '1rem', right: '1rem', width: '0.5rem', height: '0.5rem', backgroundColor: '#f43f5e', borderRadius: '50%' }}></div>}
       <div style={{ 
-        width: '4rem', 
-        height: '4rem', 
-        borderRadius: '1.25rem', 
+        width: '2.5rem', 
+        height: '2.5rem', 
+        borderRadius: '0.75rem', 
         backgroundColor: bg, 
         color: color, 
         display: 'flex', 
@@ -234,14 +234,14 @@ function StatCard({ icon, label, value, trend, color, bg, description, alert }) 
         {icon}
       </div>
       <div>
-        <p style={{ fontSize: '0.7rem', fontWeight: '900', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 0.5rem 0' }}>{label}</p>
-        <h4 style={{ fontSize: '1.75rem', fontWeight: '900', margin: '0 0 0.25rem 0', letterSpacing: '-0.02em' }}>{value}</h4>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
+        <p style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 0.25rem 0' }}>{label}</p>
+        <h4 style={{ fontSize: '1.25rem', fontWeight: '900', margin: '0 0 0.15rem 0', letterSpacing: '-0.02em' }}>{value}</h4>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem' }}>
           <span style={{ fontSize: '0.65rem', fontWeight: '700', color: 'var(--text-muted)' }}>{description}</span>
           <span style={{ 
-            fontSize: '0.65rem', 
+            fontSize: '0.6rem', 
             fontWeight: '800', 
-            padding: '0.25rem 0.6rem', 
+            padding: '0.2rem 0.5rem', 
             borderRadius: '999px', 
             backgroundColor: bg, 
             color: color 
@@ -256,12 +256,12 @@ function StatCard({ icon, label, value, trend, color, bg, description, alert }) 
 
 function ModernMetric({ label, value, color }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>{label}</span>
-        <span style={{ fontSize: '1.5rem', fontWeight: '900' }}>{value}%</span>
+        <span style={{ fontWeight: '700', color: 'var(--text-dark)', fontSize: '0.875rem' }}>{label}</span>
+        <span style={{ fontSize: '1.15rem', fontWeight: '900' }}>{value}%</span>
       </div>
-      <div style={{ width: '100%', height: '0.75rem', backgroundColor: 'var(--secondary)', borderRadius: '999px', overflow: 'hidden' }}>
+      <div style={{ width: '100%', height: '0.5rem', backgroundColor: 'var(--secondary)', borderRadius: '999px', overflow: 'hidden' }}>
         <div 
           style={{ width: `${value}%`, height: '100%', backgroundColor: color, borderRadius: '999px', transition: 'width 1s ease-out' }} 
         />

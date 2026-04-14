@@ -90,7 +90,7 @@ export default function DashboardLayout({ children }) {
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}>
       {/* Sidebar */}
       <aside style={{
-        width: '260px',
+        width: '240px',
         backgroundColor: 'var(--bg-card)',
         borderRight: '1px solid var(--border-color)',
         display: 'flex',
@@ -99,23 +99,24 @@ export default function DashboardLayout({ children }) {
         height: '100vh',
         boxShadow: 'var(--shadow-sm)'
       }}>
-        <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
-          <h2 style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '1.5rem', margin: 0 }}>Lini HRIS</h2>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Enterprise Edition</p>
+        <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+          <h2 style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '1.25rem', margin: 0 }}>Lini HRIS</h2>
+          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Enterprise Edition</p>
         </div>
         
-        <nav style={{ flex: 1, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <nav style={{ flex: 1, padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
           {navItems.map((item) => {
             const isActive = pathname === item.path
             return (
               <Link key={item.path} href={item.path} style={{
-                padding: '0.75rem 1rem',
+                padding: '0.6rem 0.875rem',
                 borderRadius: 'var(--radius-md)',
                 backgroundColor: isActive ? 'var(--primary-light)' : 'transparent',
                 color: isActive ? 'var(--primary)' : 'var(--text-muted)',
                 fontWeight: isActive ? '600' : '500',
                 transition: 'var(--transition)',
-                display: 'block'
+                display: 'block',
+                fontSize: '0.875rem'
               }}>
                 {item.name}
               </Link>
@@ -123,22 +124,23 @@ export default function DashboardLayout({ children }) {
           })}
         </nav>
 
-        <div style={{ padding: '1rem', borderTop: '1px solid var(--border-color)' }}>
-          <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)' }}>
-            <p style={{ fontSize: '0.875rem', fontWeight: '600' }}>{user?.email || 'Loading...'}</p>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Administrator</p>
+        <div style={{ padding: '0.75rem', borderTop: '1px solid var(--border-color)' }}>
+          <div style={{ marginBottom: '0.75rem', padding: '0.5rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)' }}>
+            <p style={{ fontSize: '0.8rem', fontWeight: '600', margin: 0 }}>{user?.email || 'Loading...'}</p>
+            <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', margin: 0 }}>Administrator</p>
           </div>
           <button 
             onClick={handleLogout}
             style={{
               width: '100%',
-              padding: '0.75rem',
+              padding: '0.6rem',
               backgroundColor: 'transparent',
               border: '1px solid var(--danger)',
               color: 'var(--danger)',
               borderRadius: 'var(--radius-md)',
               fontWeight: '500',
               cursor: 'pointer',
+              fontSize: '0.8rem',
               transition: 'var(--transition)'
             }}
             onMouseOver={(e) => { e.target.style.backgroundColor = 'var(--danger)'; e.target.style.color = '#fff' }}
@@ -150,7 +152,7 @@ export default function DashboardLayout({ children }) {
       </aside>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, marginLeft: '260px', padding: '2rem' }}>
+      <main style={{ flex: 1, marginLeft: '240px', padding: '1.25rem' }}>
         {children}
       </main>
     </div>

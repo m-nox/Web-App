@@ -272,13 +272,13 @@ export default function KaryawanPage() {
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
         <div>
-          <h1 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '0.5rem' }}>Manajemen Karyawan</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Kelola profil, jabatan, dan struktur departemen karyawan Anda.</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '0.2rem' }}>Manajemen Karyawan</h1>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>Kelola profil, jabatan, dan struktur departemen.</p>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-        <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
+        <button onClick={() => handleOpenModal('add')} className="btn btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}>
           + Tambah Karyawan
         </button>
       </div>
@@ -327,19 +327,19 @@ export default function KaryawanPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
-                <th style={{ padding: '1.25rem 1rem', width: '40px' }}>
+                <th style={{ padding: '0.875rem 1rem', width: '40px' }}>
                   <input 
                     type="checkbox" 
                     checked={selectedIds.length === karyawanData.length && karyawanData.length > 0} 
                     onChange={toggleSelectAll}
-                    style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                    style={{ cursor: 'pointer', width: '16px', height: '16px' }}
                   />
                 </th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Nama Karyawan</th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Departemen</th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Jabatan</th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Informasi Kontak</th>
-                <th style={{ padding: '1.25rem 1rem', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', textTransform: 'uppercase' }}>Password</th>
+                <th style={{ padding: '0.875rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Nama Karyawan</th>
+                <th style={{ padding: '0.875rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Departemen</th>
+                <th style={{ padding: '0.875rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Jabatan</th>
+                <th style={{ padding: '0.875rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Informasi Kontak</th>
+                <th style={{ padding: '0.875rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Password</th>
               </tr>
             </thead>
             <tbody>
@@ -354,40 +354,40 @@ export default function KaryawanPage() {
                     transition: 'var(--transition)',
                     backgroundColor: selectedIds.includes(k.id) ? 'rgba(0, 174, 239, 0.05)' : 'transparent' 
                   }}>
-                    <td style={{ padding: '1.25rem 1rem' }}>
+                    <td style={{ padding: '0.75rem 1rem' }}>
                       <input 
                         type="checkbox" 
                         checked={selectedIds.includes(k.id)} 
                         onChange={() => toggleSelect(k.id)}
-                        style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                        style={{ cursor: 'pointer', width: '16px', height: '16px' }}
                       />
                     </td>
-                    <td style={{ padding: '1.25rem 1rem' }}>
-                      <p style={{ fontWeight: '600', color: 'var(--text-dark)', margin: 0 }}>{k.nama_depan} {k.nama_belakang}</p>
-                      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>ID: {k.id.substring(0, 8)}...</p>
+                    <td style={{ padding: '0.75rem 1rem' }}>
+                      <p style={{ fontWeight: '600', color: 'var(--text-dark)', margin: 0, fontSize: '0.875rem' }}>{k.nama_depan} {k.nama_belakang}</p>
+                      <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: 0 }}>ID: {k.id.substring(0, 8)}</p>
                     </td>
-                    <td style={{ padding: '1.25rem 1rem' }}>
-                      <span style={{ padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', fontSize: '0.75rem', fontWeight: '600' }}>
+                    <td style={{ padding: '0.75rem 1rem' }}>
+                      <span style={{ padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', fontSize: '0.7rem', fontWeight: '700' }}>
                         {k.departemen?.nama_departemen || 'N/A'}
                       </span>
                     </td>
-                    <td style={{ padding: '1.25rem 1rem' }}>
-                      <p style={{ margin: 0, fontSize: '0.875rem' }}>{k.jabatan?.nama_jabatan || '-'}</p>
+                    <td style={{ padding: '0.75rem 1rem' }}>
+                      <p style={{ margin: 0, fontSize: '0.8125rem' }}>{k.jabatan?.nama_jabatan || '-'}</p>
                     </td>
-                    <td style={{ padding: '1.25rem 1rem' }}>
-                      <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-dark)' }}>{k.email}</p>
-                      <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>{k.no_telepon || '-'}</p>
+                    <td style={{ padding: '0.75rem 1rem' }}>
+                      <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--text-dark)' }}>{k.email}</p>
+                      <p style={{ margin: 0, fontSize: '0.7rem', color: 'var(--text-muted)' }}>{k.no_telepon || '-'}</p>
                     </td>
-                    <td style={{ padding: '1.25rem 1rem' }}>
+                    <td style={{ padding: '0.75rem 1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <p style={{ margin: 0, fontSize: '0.875rem' }}>
+                        <p style={{ margin: 0, fontSize: '0.8125rem' }}>
                           {visiblePasswords[k.id] ? k.password || 'Hris123!' : '••••••••'}
                         </p>
                         <button 
                           onClick={() => togglePasswordVisibility(k.id)}
-                          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', padding: '0.25rem', display: 'flex', alignItems: 'center' }}
+                          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', padding: '0.2rem', display: 'flex', alignItems: 'center' }}
                         >
-                          {visiblePasswords[k.id] ? <EyeOff size={16} /> : <Eye size={16} />}
+                          {visiblePasswords[k.id] ? <EyeOff size={14} /> : <Eye size={14} />}
                         </button>
                       </div>
                     </td>
@@ -406,7 +406,7 @@ export default function KaryawanPage() {
           background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100
         }}>
-          <div className="card glass" style={{ width: '100%', maxWidth: '600px', padding: '2.5rem', maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="card glass" style={{ width: '100%', maxWidth: '540px', padding: '1.5rem', maxHeight: '95vh', overflowY: 'auto', borderRadius: '1rem' }}>
             {modalMode === 'delete' ? (
               <>
                 <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--danger)', fontWeight: '700' }}>Konfirmasi Penghapusan Massal</h2>
@@ -422,11 +422,11 @@ export default function KaryawanPage() {
               </>
             ) : (
               <form onSubmit={handleSubmit}>
-                <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', fontWeight: '700', color: 'var(--primary)' }}>
-                  {modalMode === 'add' ? 'Registrasi Karyawan Baru' : 'Perbarui Data Karyawan'}
+                <h2 style={{ fontSize: '1.25rem', marginBottom: '1.25rem', fontWeight: '700', color: 'var(--primary)' }}>
+                  {modalMode === 'add' ? 'Tambah Karyawan Baru' : 'Perbarui Data Karyawan'}
                 </h2>
                 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600' }}>Nama Depan *</label>
                     <input type="text" required value={formData.nama_depan} onChange={(e) => setFormData({...formData, nama_depan: e.target.value})} placeholder="John" style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', background: 'white' }} />
