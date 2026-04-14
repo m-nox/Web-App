@@ -188,13 +188,6 @@ export default function EmployeeDashboard() {
           }}>
             {isAtOffice ? 'Di Dalam Jaringan Kantor' : 'Di Luar Jaringan Kantor'}
           </div>
-          
-          {/* Debug IP Info - Only shown if outside office and for debugging */}
-          {!isAtOffice && attendance?.clientIp && (
-            <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '-1rem', marginBottom: '1.5rem', opacity: 0.6 }}>
-              IP Terdeteksi: {attendance.clientIp}
-            </p>
-          )}
               
           <h2 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0 0 0.5rem 0', color: 'var(--text-dark)' }}>
             {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
