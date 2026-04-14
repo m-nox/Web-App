@@ -71,7 +71,7 @@ export default function EmployeeLayout({ children }) {
           }
           .employee-main {
             margin-left: 0 !important;
-            padding-top: 60px !important;
+            padding-top: 48px !important;
           }
           .mobile-header {
             display: flex !important;
@@ -109,15 +109,15 @@ export default function EmployeeLayout({ children }) {
         <header className="mobile-header" style={{
           display: 'none',
           position: 'fixed', top: 0, left: 0, right: 0,
-          height: '60px',
+          height: '48px',
           backgroundColor: 'var(--bg-card)',
           borderBottom: '1px solid var(--border-color)',
           zIndex: 80,
-          padding: '0 1.25rem',
+          padding: '0 0.75rem',
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <h2 style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '1.15rem', margin: 0 }}>Lini HRIS</h2>
+          <h2 style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '1rem', margin: 0 }}>Lini HRIS</h2>
           <button 
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}

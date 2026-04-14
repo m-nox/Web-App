@@ -44,8 +44,8 @@
 
 @media (max-width: 768px) {
   :root {
-    --page-padding: 1rem;
-    --section-gap: 1rem;
+    --page-padding: 0.65rem;
+    --section-gap: 0.65rem;
   }
 }
 
@@ -96,9 +96,10 @@ h3 { font-size: clamp(1rem, 3.5vw, 1.15rem); }
 p { font-size: clamp(0.8125rem, 3vw, 0.875rem); }
 
 @media (max-width: 640px) {
-  h1 { font-size: 1.25rem; }
-  h2 { font-size: 1.15rem; }
-  h3 { font-size: 1.05rem; }
+  h1 { font-size: 1.15rem; }
+  h2 { font-size: 1.05rem; }
+  h3 { font-size: 0.95rem; }
+  p { font-size: 0.75rem; }
 }
 
 /* Base Utility Classes */

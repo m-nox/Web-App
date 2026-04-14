@@ -116,9 +116,9 @@ export default function EmployeeDashboard() {
   const cardStyle = {
     backgroundColor: 'var(--bg-card)',
     borderRadius: 'var(--radius-lg)',
-    padding: '0.75rem',
+    padding: '0.5rem',
     border: '1px solid var(--border-color)',
-    marginBottom: '0.75rem'
+    marginBottom: '0.65rem'
   }
 
   return (
@@ -209,21 +209,21 @@ export default function EmployeeDashboard() {
             <span>IP: <strong>{attendance?.clientIp?.slice(0, 15)}...</strong></span>
           </div>
               
-          <h2 style={{ fontSize: '2rem', fontWeight: '900', margin: '0 0 0.15rem 0', color: 'var(--text-dark)' }}>
+          <h2 style={{ fontSize: '1.65rem', fontWeight: '900', margin: '0 0 0.1rem 0', color: 'var(--text-dark)' }}>
             {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </h2>
-          <p style={{ color: 'var(--text-muted)', margin: '0 0 0.75rem 0', fontSize: '0.75rem' }}>
+          <p style={{ color: 'var(--text-muted)', margin: '0 0 0.65rem 0', fontSize: '0.7rem' }}>
             {time.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', marginBottom: '0.65rem' }}>
             <div>
-              <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--text-muted)', fontWeight: '800' }}>MASUK</p>
-              <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: '800' }}>{todayAtt?.jam_masuk || '--:--'}</p>
+              <p style={{ margin: 0, fontSize: '0.5rem', color: 'var(--text-muted)', fontWeight: '800' }}>MASUK</p>
+              <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: '800' }}>{todayAtt?.jam_masuk || '--:--'}</p>
             </div>
             <div>
-              <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--text-muted)', fontWeight: '800' }}>KELUAR</p>
-              <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: '800' }}>{todayAtt?.jam_keluar || '--:--'}</p>
+              <p style={{ margin: 0, fontSize: '0.5rem', color: 'var(--text-muted)', fontWeight: '800' }}>KELUAR</p>
+              <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: '800' }}>{todayAtt?.jam_keluar || '--:--'}</p>
             </div>
           </div>
 
@@ -261,31 +261,31 @@ export default function EmployeeDashboard() {
         {/* Right Col: Stats & History */}
         <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.5rem' }}>
-               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1.15rem' }}>{totalOnTime}</h3>
-               <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--success)', fontWeight: '800' }}>ON TIME</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.4rem' }}>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.4rem' }}>
+               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1rem' }}>{totalOnTime}</h3>
+               <p style={{ margin: 0, fontSize: '0.5rem', color: 'var(--success)', fontWeight: '800' }}>ON TIME</p>
             </div>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.5rem' }}>
-               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1.15rem' }}>{totalTerlambat}</h3>
-               <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--danger)', fontWeight: '800' }}>LATE</p>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.4rem' }}>
+               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1rem' }}>{totalTerlambat}</h3>
+               <p style={{ margin: 0, fontSize: '0.5rem', color: 'var(--danger)', fontWeight: '800' }}>LATE</p>
             </div>
-            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.5rem' }}>
-               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1.15rem' }}>{totalHadir}</h3>
-               <p style={{ margin: 0, fontSize: '0.55rem', color: 'var(--primary)', fontWeight: '800' }}>ATTEND</p>
+            <div style={{ ...cardStyle, flex: 1, marginBottom: 0, textAlign: 'center', padding: '0.4rem' }}>
+               <h3 style={{ margin: '0 0 0.1rem 0', fontWeight: '900', fontSize: '1rem' }}>{totalHadir}</h3>
+               <p style={{ margin: 0, fontSize: '0.5rem', color: 'var(--primary)', fontWeight: '800' }}>ATTEND</p>
             </div>
           </div>
 
-          <div style={{ ...cardStyle, flex: 1, marginBottom: 0, padding: '1rem' }}>
-            <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.95rem', fontWeight: '800' }}>Riwayat</h3>
+          <div style={{ ...cardStyle, flex: 1, marginBottom: 0, padding: '0.65rem' }}>
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem', fontWeight: '800' }}>Riwayat</h3>
             <div className="responsive-table">
             {history.length === 0 ? (
                <p style={{ color: 'var(--text-muted)' }}>Belum ada data history.</p>
             ) : (
-               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
+               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem' }}>
                   <thead>
                      <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                        <th style={{ padding: '0.5rem 0' }}>Tanggal</th>
+                        <th style={{ padding: '0.35rem 0' }}>Tanggal</th>
                         <th style={{ padding: '0.5rem 0' }}>Jam</th>
                         <th style={{ padding: '0.5rem 0', textAlign: 'right' }}>Status</th>
                      </tr>
@@ -293,10 +293,10 @@ export default function EmployeeDashboard() {
                   <tbody>
                      {history.slice(0, 5).map(h => (
                         <tr key={h.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                           <td style={{ padding: '0.4rem 0' }}>
+                           <td style={{ padding: '0.25rem 0' }}>
                               {new Date(h.tanggal).toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' })}
                            </td>
-                           <td style={{ padding: '0.4rem 0' }}>
+                           <td style={{ padding: '0.25rem 0' }}>
                               {h.jam_masuk || '-'} — {h.jam_keluar || '-'}
                            </td>
                            <td style={{ padding: '0.4rem 0', textAlign: 'right' }}>
