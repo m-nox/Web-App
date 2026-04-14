@@ -30,9 +30,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch strategy:
-// - API routes: Network first (always fresh data), fallback to cache
-// - Static assets (images, fonts, pages): Cache first, fallback to network
+self.addEventListener('fetch', (event) => {
   // Optimized Strategy: Network First for everything to ensure users always see latest UI
   // Fallback to cache only if network is down (Offline Mode)
   event.respondWith(
