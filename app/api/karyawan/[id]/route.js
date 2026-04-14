@@ -28,9 +28,12 @@ export async function PUT(request, props) {
   }
 
   // 2. Update Employee Profile in Database
+  // We exclude password from the main update if you don't have the column, 
+  // but since the UI needs it as a 'hint', adding the column is better.
+  // This fix ensures it won't crash if other fields are updated.
   const { error } = await supabaseAdmin
     .from('karyawan')
-    .update(body) // Update all including password hint
+    .update(otherData) 
     .eq('id', id)
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
