@@ -138,7 +138,7 @@ export default function EmployeeLayout({ children }) {
             display: 'flex',
             flexDirection: 'column',
             position: 'fixed',
-            height: '100vh',
+            height: '100dvh',
             zIndex: 100,
             boxShadow: 'var(--shadow-sm)',
             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -162,14 +162,14 @@ export default function EmployeeLayout({ children }) {
                   key={item.name}
                   href={item.path}
                   style={{
-                    padding: '0.6rem 0.875rem',
+                    padding: '0.45rem 0.75rem',
                     borderRadius: 'var(--radius-md)',
                     textDecoration: 'none',
                     fontWeight: isActive ? '600' : '500',
                     backgroundColor: isActive ? 'var(--primary-light)' : 'transparent',
                     color: isActive ? 'var(--primary)' : 'var(--text-muted)',
                     display: 'block',
-                    fontSize: '0.875rem',
+                    fontSize: '0.85rem',
                     transition: 'var(--transition)'
                   }}
                 >
@@ -180,15 +180,15 @@ export default function EmployeeLayout({ children }) {
           </nav>
 
           {/* Bottom Actions */}
-          <div style={{ padding: '0.75rem', borderTop: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '0.5rem', borderTop: '1px solid var(--border-color)', marginTop: 'auto' }}>
             {profile && (
-              <div style={{ marginBottom: '0.75rem', padding: '0.5rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0, fontSize: '0.75rem' }}>
+              <div style={{ marginBottom: '0.5rem', padding: '0.4rem', backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0, fontSize: '0.7rem' }}>
                   {profile.nama_depan[0]}{profile.nama_belakang?.[0] || ''}
                 </div>
                 <div style={{ overflow: 'hidden' }}>
-                  <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{profile.nama_depan}</p>
-                  <p style={{ margin: 0, fontSize: '0.65rem', color: 'var(--text-muted)' }}>{profile.jabatan?.nama_jabatan || 'Karyawan'}</p>
+                  <p style={{ margin: 0, fontSize: '0.75rem', fontWeight: 'bold', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{profile.nama_depan}</p>
+                  <p style={{ margin: 0, fontSize: '0.6rem', color: 'var(--text-muted)' }}>{profile.jabatan?.nama_jabatan || 'Karyawan'}</p>
                 </div>
               </div>
             )}
@@ -196,14 +196,14 @@ export default function EmployeeLayout({ children }) {
               onClick={handleLogout}
               style={{
                 width: '100%',
-                padding: '0.6rem',
+                padding: '0.5rem',
                 backgroundColor: 'transparent',
                 border: '1px solid var(--danger)',
                 color: 'var(--danger)',
                 borderRadius: 'var(--radius-md)',
                 cursor: 'pointer',
-                fontWeight: '500',
-                fontSize: '0.8rem',
+                fontWeight: '600',
+                fontSize: '0.75rem',
                 transition: 'var(--transition)'
               }}
             >

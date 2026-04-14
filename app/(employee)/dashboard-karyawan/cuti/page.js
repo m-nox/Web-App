@@ -92,21 +92,21 @@ export default function EmployeeCutiPage() {
 
       {/* Summary Cards */}
       <div className="grid-stack" style={{ gap: '0.75rem', marginBottom: '1.25rem' }}>
-        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
-          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Pending</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--warning)', margin: 0 }}>
+        <div className="card glass" style={{ padding: '0.65rem 1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.15rem' }}>Pending</p>
+          <p style={{ fontSize: '1.25rem', fontWeight: '900', color: 'var(--warning)', margin: 0 }}>
             {history.filter(h => h.status === 'Pending').length}
           </p>
         </div>
-        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
-          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Approve</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--success)', margin: 0 }}>
+        <div className="card glass" style={{ padding: '0.65rem 1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.15rem' }}>Approve</p>
+          <p style={{ fontSize: '1.25rem', fontWeight: '900', color: 'var(--success)', margin: 0 }}>
             {history.filter(h => h.status === 'Disetujui').length}
           </p>
         </div>
-        <div className="card glass" style={{ padding: '1rem', marginBottom: 0 }}>
-          <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Total</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--primary)', margin: 0 }}>
+        <div className="card glass" style={{ padding: '0.65rem 1rem', marginBottom: 0 }}>
+          <p style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '0.15rem' }}>Total</p>
+          <p style={{ fontSize: '1.25rem', fontWeight: '900', color: 'var(--primary)', margin: 0 }}>
             {history.length}
           </p>
         </div>
